@@ -2,63 +2,157 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: black; /* Schwarzer Hintergrund */
+    color: white; /* Weiße Schriftfarbe */
 }
 
 header {
-    width: 100%;
     background-color: #4CAF50;
-    padding: 10px 0;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius: 10px;
+    width: calc(100% - 40px);
+    margin: 20px auto;
+    transition: top 0.3s;
 }
 
-.logo {
-    margin-left: 20px;
+header.hidden {
+    top: -80px; /* Versteckt den Header nach oben */
+}
+
+header .logo {
     font-size: 24px;
     font-weight: bold;
     color: white;
 }
 
-nav ul {
-    list-style: none;
+header nav ul {
+    list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
 }
 
-nav ul li {
+header nav ul li {
     margin-right: 20px;
 }
 
-nav ul li a {
+header nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: black;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
 main {
-    margin-top: 20px;
-    width: 80%;
+    margin-top: 120px; /* Platz oberhalb des main-Inhalts, um Header zu vermeiden */
+    padding: 40px;
 }
 
-section {
+#intro {
+    background-image: url('images/intro-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+#intro h1 {
+    font-size: 6em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#intro p {
+    font-size: 1.5em;
     margin-bottom: 40px;
 }
 
-.timer {
-    font-size: 48px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
+.scroll-down {
+    font-size: 2em;
+    margin-top: 20px;
+    cursor: pointer;
+    animation: bounce 2s infinite;
 }
 
-h1 {
-    color: #4CAF50;
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+section {
+    margin-bottom: 80px; /* Größerer Abstand zwischen den Abschnitten */
+    text-align: center; /* Überschriften zentriert */
+}
+
+section h1 {
+    font-size: 3em; /* Größere Überschrift */
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.timer, #clock {
+    font-size: 4em; /* Größerer Timer und Uhrzeit-Anzeige */
+    margin-top: 40px;
+}
+
+#color-picker-button, #timer-color-picker-button {
+    margin-top: 20px; /* Abstand vom Button zur Uhrzeit */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
     text-align: center;
+    width: 100%;
+}
+
+footer h1 {
+    font-size: 3em; /* Größere Überschrift im Footer */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+footer ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: #4CAF50;
 }
