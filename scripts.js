@@ -70,4 +70,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Example logic:
         // - Calculate time until next event (e.g., next break, end of school, etc.)
         // - For demonstration purposes, return a placeholder string
-        let
+        let timeUntilNextEvent
