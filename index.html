@@ -3,29 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schüler-Timer</title>
+    <title>Schul Timer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <div class="logo">Schul Timer</div>
+        <div class="logo">Logo</div>
         <nav>
             <ul>
-                <li><a href="#ferien">Ferien</a></li>
-                <li><a href="#pause">Pause</a></li>
+                <li><a href="#clock-section">Uhrzeit</a></li>
+                <li><a href="#timer-section">Ereignisse</a></li>
+                <li><a href="https://bit.ly/impressum-schultimer">Impressum</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="ferien">
-            <h1>Nächste Ferien</h1>
-            <div id="ferien-timer" class="timer"></div>
+        <section id="intro">
+            <h1>Schul Timer</h1>
+            <p>Created by Kilian</p>
+            <div class="scroll-down">&#9660;</div>
         </section>
-        <section id="pause">
-            <h1>Nächste Pause</h1>
-            <div id="pause-timer" class="timer"></div>
+
+        <section id="clock-section">
+            <h1>Genaue Uhrzeit</h1>
+            <div id="clock">Loading...</div>
+            <button id="clock-fullscreen-button">Vollbildmodus</button>
+            <button id="color-picker-button">Hintergrundfarbe ändern</button>
+        </section>
+
+        <section id="timer-section">
+            <h1>Zeit bis zur nächsten Pause oder Unterrichtszeit</h1>
+            <div id="timer">Loading...</div>
+            <button id="timer-fullscreen-button">Vollbildmodus</button>
+            <button id="timer-color-picker-button">Hintergrundfarbe ändern</button>
+        </section>
+
+        <section>
+            <h1>Erklärung</h1>
+            <p><strong>Hi!</strong><br>
+            Diese Webseite ist für die Grund- und Mittelschule Baunach programmiert und dient allen Schülern dazu, die Zeit der WIRKLICH wichtigen Ereignisse in der Schule zu verfolgen (z.B. Pausen, Unterrichtsschluss, Ferien).</p>
         </section>
     </main>
-    <script src="scripts.js"></script>
+
+    <footer>
+        <h1>Buttons</h1>
+        <ul>
+            <li><a href="#clock-section">Uhrzeit</a></li>
+            <li><a href="#timer-section">Ereignisse</a></li>
+            <li><a href="https://bit.ly/impressum-schultimer">Impressum</a></li>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
