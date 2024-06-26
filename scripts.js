@@ -46,30 +46,28 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Implementieren Sie hier die Logik für die Farbauswahl');
     }
 
-    // Placeholder function for fetching and displaying current time
-    function getCurrentTime() {
+    // Function to update clock time
+    function updateClock() {
         const now = new Date();
-        return now.toLocaleTimeString();
+        clock.textContent = now.toLocaleTimeString();
+    }
+
+    // Function to update timer until next event
+    function updateTimer() {
+        const timeUntilNextEvent = getTimeUntilNextEvent();
+        timer.textContent = timeUntilNextEvent;
     }
 
     // Placeholder function for fetching and displaying time until next event
     function getTimeUntilNextEvent() {
         const now = new Date();
-        const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
+        const currentDay = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentSecond = now.getSeconds();
 
-        // Implement logic to calculate time until next event based on day and time
+        // Implement logic to calculate time until next event based on current day and time
         // Example logic:
-        // - Check current day and time
         // - Calculate time until next event (e.g., next break, end of school, etc.)
-
-        let timeUntilNextEvent = "00:00:00"; // Placeholder for time calculation
-
-        return timeUntilNextEvent;
-    }
-
-    // Initial time display
-    clock.textContent = getCurrentTime();
-   
+        // - For demonstration purposes, return a placeholder string
+        let
