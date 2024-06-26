@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Implementieren Sie hier die Logik für die Farbauswahl');
     }
 
-    // Function to update clock time
-    function updateClock() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const seconds = now.getSeconds().toString().padStart(2, '0');
-        clock.textContent = `${hours}:${minutes}:${seconds}`;
-    }
+// Function to update clock time with German timezone
+function updateClock() {
+    const now = new Date();
+    const options = { timeZone: 'Europe/Berlin', hour12: false };
+    const germanTime = now.toLocaleTimeString('de-DE', options);
+    clock.textContent = germanTime;
+}
+
 
     // Function to update timer until next event
     function updateTimer() {
