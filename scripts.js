@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clock section
     const clock = document.getElementById('clock');
     const clockFullscreenButton = document.getElementById('clock-fullscreen-button');
-    const clockColorPickerButton = document.getElementById('color-picker-button');
+    const clockColorPickerButton = document.getElementById('clock-color-picker-button');
 
     clockFullscreenButton.addEventListener('click', function() {
         toggleFullscreen(clock);
@@ -72,11 +72,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initial time display
     clock.textContent = getCurrentTime();
-    timer.textContent = getTimeUntilNextEvent();
-
-    // Update time every second
-    setInterval(function() {
-        clock.textContent = getCurrentTime();
-        timer.textContent = getTimeUntilNextEvent();
-    }, 1000);
-});
+   
