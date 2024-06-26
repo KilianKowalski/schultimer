@@ -112,12 +112,15 @@ section h1 {
     margin-bottom: 40px;
 }
 
-.timer, #clock {
-    font-size: 4em; /* Größerer Timer und Uhrzeit-Anzeige */
+.time-display {
+    font-size: 4em; /* Größere Timer und Uhrzeit-Anzeige */
     margin-top: 40px;
 }
 
-#color-picker-button, #timer-color-picker-button {
+#clock-fullscreen-button,
+#timer-fullscreen-button,
+#clock-color-picker-button,
+#timer-color-picker-button {
     margin-top: 20px; /* Abstand vom Button zur Uhrzeit */
 }
 
