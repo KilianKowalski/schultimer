@@ -1,28 +1,82 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const ferienDate = new Date("2024-07-20T00:00:00"); // Beispiel Ferienzeit
-    const pauseDate = new Date(); // Beispiel Pausenzeit (wird später aktualisiert)
+document.addEventListener('DOMContentLoaded', function() {
+    // Clock section
+    const clock = document.getElementById('clock');
+    const clockFullscreenButton = document.getElementById('clock-fullscreen-button');
+    const clockColorPickerButton = document.getElementById('color-picker-button');
 
-    function updateTimer(timerElement, targetDate) {
-        const now = new Date();
-        const timeLeft = targetDate - now;
-        
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    clockFullscreenButton.addEventListener('click', function() {
+        toggleFullscreen(clock);
+    });
 
-        timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    clockColorPickerButton.addEventListener('click', function() {
+        openColorPicker(clock);
+    });
 
-        if (timeLeft < 0) {
-            timerElement.textContent = "Zeit abgelaufen!";
+    // Timer section
+    const timer = document.getElementById('timer');
+    const timerFullscreenButton = document.getElementById('timer-fullscreen-button');
+    const timerColorPickerButton = document.getElementById('timer-color-picker-button');
+
+    timerFullscreenButton.addEventListener('click', function() {
+        toggleFullscreen(timer);
+    });
+
+    timerColorPickerButton.addEventListener('click', function() {
+        openColorPicker(timer);
+    });
+
+    // Placeholder functions for fullscreen and color picker
+    function toggleFullscreen(element) {
+        // Check if browser supports fullscreen API
+        if (document.fullscreenEnabled) {
+            if (!document.fullscreenElement) {
+                element.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        } else {
+            alert('Your browser does not support fullscreen mode.');
         }
     }
 
-    const ferienTimerElement = document.getElementById("ferien-timer");
-    const pauseTimerElement = document.getElementById("pause-timer");
+    function openColorPicker(element) {
+        // Placeholder for opening color picker
+        alert('Implementieren Sie hier die Logik für die Farbauswahl');
+    }
 
-    setInterval(() => {
-        updateTimer(ferienTimerElement, ferienDate);
-        updateTimer(pauseTimerElement, pauseDate);
+    // Placeholder function for fetching and displaying current time
+    function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString();
+    }
+
+    // Placeholder function for fetching and displaying time until next event
+    function getTimeUntilNextEvent() {
+        const now = new Date();
+        const dayOfWeek = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        // Implement logic to calculate time until next event based on day and time
+        // Example logic:
+        // - Check current day and time
+        // - Calculate time until next event (e.g., next break, end of school, etc.)
+
+        let timeUntilNextEvent = "00:00:00"; // Placeholder for time calculation
+
+        return timeUntilNextEvent;
+    }
+
+    // Initial time display
+    clock.textContent = getCurrentTime();
+    timer.textContent = getTimeUntilNextEvent();
+
+    // Update time every second
+    setInterval(function() {
+        clock.textContent = getCurrentTime();
+        timer.textContent = getTimeUntilNextEvent();
     }, 1000);
 });
