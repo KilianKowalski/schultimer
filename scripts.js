@@ -49,7 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to update clock time
     function updateClock() {
         const now = new Date();
-        clock.textContent = now.toLocaleTimeString();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        clock.textContent = `${hours}:${minutes}:${seconds}`;
     }
 
     // Function to update timer until next event
@@ -70,4 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Example logic:
         // - Calculate time until next event (e.g., next break, end of school, etc.)
         // - For demonstration purposes, return a placeholder string
-        let timeUntilNextEvent
+        let timeUntilNextEvent = "00:00:00"; // Placeholder for the time until the next event
+        return timeUntilNextEvent;
+    }
+
+    // Update clock every second
+    setInterval(updateClock, 1000);
+
+    // Update timer every minute
+    setInterval(updateTimer, 60000);
+
+    // Initial update
+    updateClock();
+    updateTimer();
+});
