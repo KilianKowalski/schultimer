@@ -84,10 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateEventTimer() {
         const now = new Date();
+        const today = now.toISOString().split('T')[0];
+
+        let nextEventTime;
         let nextEvent = events.find(event => {
-            const [hours, minutes] = event.time.split(':').map(Number);
-            const eventTime = new Date();
-            eventTime.setHours(hours, minutes, 0, 0);
+            const eventTime = new Date(`${today}T${event.time}:00`);
             return eventTime > now;
         });
 
@@ -95,12 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
             nextEvent = { name: 'Schulbeginn', time: '08:00' };
             const nextDay = new Date(now);
             nextDay.setDate(now.getDate() + 1);
-            const [hours, minutes] = nextEvent.time.split(':').map(Number);
-            nextDay.setHours(hours, minutes, 0, 0);
+            const nextEventDate = nextDay.toISOString().split('T')[0];
+            nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
         } else {
-            const [hours, minutes] = nextEvent.time.split(':').map(Number);
-            nextEventTime = new Date(now);
-            nextEventTime.setHours(hours, minutes, 0, 0);
+            nextEventTime = new Date(`${today}T${nextEvent.time}:00`);
         }
 
         const diff = nextEventTime - now;
