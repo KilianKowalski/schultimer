@@ -1,3 +1,4 @@
+/* Allgemeine Stile */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -5,6 +6,7 @@ body {
     color: #333;
 }
 
+/* Header-Stile */
 header {
     position: fixed;
     width: 100%;
@@ -52,6 +54,7 @@ header nav ul li a:hover {
     background-color: #ddd;
 }
 
+/* Start-Screen-Stile */
 #start-screen {
     display: flex;
     flex-direction: column;
@@ -96,16 +99,19 @@ header nav ul li a:hover {
     }
 }
 
+/* Container-Stile */
 .container {
     padding: 60px 20px;
 }
 
+/* Abschnitts-Stile */
 #time, #events {
     text-align: center;
 }
 
 #clock, #event-timer {
-    font-size: 3em;
+    font-size: 5em;
+    font-weight: bold;
     margin: 20px 0;
 }
 
@@ -117,6 +123,7 @@ header nav ul li a:hover {
     cursor: pointer;
 }
 
+/* Footer-Stile */
 footer {
     background-color: #333;
     color: white;
