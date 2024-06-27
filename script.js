@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorBtn = document.getElementById('color-btn');
     const colorPicker = document.getElementById('color-picker');
     const fullscreenEventBtn = document.getElementById('fullscreen-event-btn');
+    const eventColorBtn = document.getElementById('event-color-btn');
+    const eventColorPicker = document.getElementById('event-color-picker');
 
     let lastScroll = 0;
 
@@ -58,6 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Change event timer background color
+    eventColorBtn.addEventListener('click', () => {
+        eventColorPicker.click();
+    });
+
+    eventColorPicker.addEventListener('input', (event) => {
+        document.getElementById('events').style.backgroundColor = event.target.value;
+    });
+
     // Timer for next event
     const events = [
         { name: 'Pause', time: '09:30' },
@@ -82,14 +93,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!nextEvent) {
             nextEvent = { name: 'Schulbeginn', time: '08:00' };
-            now.setDate(now.getDate() + 1);
+            const nextDay = new Date(now);
+            nextDay.setDate(now.getDate() + 1);
+            const [hours, minutes] = nextEvent.time.split(':').map(Number);
+            nextDay.setHours(hours, minutes, 0, 0);
+        } else {
+            const [hours, minutes] = nextEvent.time.split(':').map(Number);
+            nextEventTime = new Date(now);
+            nextEventTime.setHours(hours, minutes, 0, 0);
         }
 
-        const [eventHours, eventMinutes] = nextEvent.time.split(':').map(Number);
-        const eventTime = new Date();
-        eventTime.setHours(eventHours, eventMinutes, 0, 0);
-
-        const diff = eventTime - now;
+        const diff = nextEventTime - now;
         const hours = Math.floor(diff / 3600000);
         const minutes = Math.floor((diff % 3600000) / 60000);
         const seconds = Math.floor((diff % 60000) / 1000);
