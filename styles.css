@@ -86,16 +86,16 @@ header nav ul li a:hover {
     border-width: 0 4px 4px 0;
     display: inline-block;
     padding: 10px;
-    transform: rotate(45deg);
+    transform: rotate(45deg) translateY(100%);
     animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
     0%, 100% {
-        transform: translateY(0);
+        transform: rotate(45deg) translateY(100%);
     }
     50% {
-        transform: translateY(-10px);
+        transform: rotate(45deg) translateY(90%);
     }
 }
 
@@ -107,6 +107,7 @@ header nav ul li a:hover {
 /* Abschnitts-Stile */
 #time, #events {
     text-align: center;
+    position: relative;
 }
 
 #clock, #event-timer {
@@ -115,12 +116,36 @@ header nav ul li a:hover {
     margin: 20px 0;
 }
 
-#fullscreen-btn, #color-btn, #fullscreen-event-btn {
+#fullscreen-btn, #color-btn, #fullscreen-event-btn, #event-color-btn {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
+}
+
+#fullscreen-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+#color-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#fullscreen-event-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+#event-color-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 
 #time.fullscreen #clock, #events.fullscreen #event-timer {
@@ -157,4 +182,23 @@ footer ul li a {
 
 footer ul li a:hover {
     text-decoration: underline;
+}
+
+/* Abschnitt Beschreibung */
+#description {
+    background-color: #fff;
+    color: #333;
+    padding: 40px 20px;
+    text-align: left;
+    border-radius: 8px;
+}
+
+#description h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+#description p {
+    font-size: 1.2em;
+    line-height: 1.5;
 }
