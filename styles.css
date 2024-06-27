@@ -1,161 +1,139 @@
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: black; /* Schwarzer Hintergrund */
-    color: white; /* Weiße Schriftfarbe */
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
 }
 
 header {
-    background-color: #4CAF50;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    width: calc(100% - 40px);
-    margin: 20px auto;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1000;
     transition: top 0.3s;
+    padding: 10px 0;
 }
 
 header.hidden {
-    top: -80px; /* Versteckt den Header nach oben */
+    top: -100px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
 header .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
+    height: 50px;
 }
 
 header nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-}
-
-header nav ul li {
-    margin-right: 20px;
+    gap: 15px;
 }
 
 header nav ul li a {
-    color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 header nav ul li a:hover {
-    color: black;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #ddd;
 }
 
-main {
-    margin-top: 120px; /* Platz oberhalb des main-Inhalts, um Header zu vermeiden */
-    padding: 40px;
-}
-
-#intro {
-    background-image: url('images/intro-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+#start-screen {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
+    height: 100vh;
+    background: url('background.jpg') no-repeat center center/cover;
     text-align: center;
+    color: white;
+    position: relative;
 }
 
-#intro h1 {
-    font-size: 6em;
-    font-weight: bold;
-    margin-bottom: 20px;
+#start-screen h1 {
+    font-size: 4em;
+    margin: 0;
 }
 
-#intro p {
-    font-size: 1.5em;
-    margin-bottom: 40px;
+#start-screen p {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 1.2em;
 }
 
-.scroll-down {
-    font-size: 2em;
-    margin-top: 20px;
-    cursor: pointer;
+.arrow {
+    width: 30px;
+    height: 30px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 10px;
+    transform: rotate(45deg);
     animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+    0%, 100% {
         transform: translateY(0);
     }
-    40% {
-        transform: translateY(-20px);
-    }
-    60% {
+    50% {
         transform: translateY(-10px);
     }
 }
 
-section {
-    margin-bottom: 80px; /* Größerer Abstand zwischen den Abschnitten */
-    text-align: center; /* Überschriften zentriert */
+.container {
+    padding: 60px 20px;
 }
 
-section h1 {
-    font-size: 3em; /* Größere Überschrift */
-    font-weight: bold;
-    margin-bottom: 40px;
+#time, #events {
+    text-align: center;
 }
 
-.time-display {
-    font-size: 4em; /* Größere Timer und Uhrzeit-Anzeige */
-    margin-top: 40px;
+#clock, #event-timer {
+    font-size: 3em;
+    margin: 20px 0;
 }
 
-#clock-fullscreen-button,
-#timer-fullscreen-button,
-#clock-color-picker-button,
-#timer-color-picker-button {
-    margin-top: 20px; /* Abstand vom Button zur Uhrzeit */
+#fullscreen-btn, #color-btn, #fullscreen-event-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
 }
 
 footer {
     background-color: #333;
     color: white;
-    padding: 20px;
     text-align: center;
-    width: 100%;
-}
-
-footer h1 {
-    font-size: 3em; /* Größere Überschrift im Footer */
-    font-weight: bold;
-    margin-bottom: 20px;
+    padding: 20px 0;
 }
 
 footer ul {
-    list-style-type: none;
-    margin: 0;
+    list-style: none;
     padding: 0;
-}
-
-footer ul li {
-    display: inline-block;
-    margin-right: 20px;
 }
 
 footer ul li a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
 }
 
 footer ul li a:hover {
-    color: #4CAF50;
+    text-decoration: underline;
 }
