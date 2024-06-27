@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: rgb(159, 174, 193);
     color: #333;
 }
 
@@ -121,6 +121,20 @@ header nav ul li a:hover {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
+}
+
+#time.fullscreen #clock, #events.fullscreen #event-timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#time.fullscreen, #events.fullscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Footer-Stile */
