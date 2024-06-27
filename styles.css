@@ -101,13 +101,17 @@ header nav ul li a:hover {
 
 /* Container-Stile */
 .container {
-    padding: 60px 20px;
+    padding: 80px 20px;
 }
 
 /* Abschnitts-Stile */
 #time, #events {
     text-align: center;
     position: relative;
+}
+
+#time h2, #events h2 {
+    text-align: left;
 }
 
 #clock, #event-timer {
