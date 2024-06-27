@@ -80,24 +80,26 @@ header nav ul li a:hover {
 }
 
 .arrow {
+    position: absolute;
+    bottom: 20px; /* Abstand zum unteren Rand */
+    left: 50%; /* Horizontal zentrieren */
+    transform: translateX(-50%);
     width: 30px;
     height: 30px;
-    border: solid white;
-    border-width: 0 4px 4px 0;
-    display: inline-block;
-    padding: 10px;
-    transform: rotate(45deg) translateY(100%);
-    animation: bounce 2s infinite;
+    background-color: white;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation: arrowDown 1s infinite alternate;
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: rotate(45deg) translateY(100%);
+@keyframes arrowDown {
+    0% {
+        transform: translateX(-50%) translateY(0);
     }
-    50% {
-        transform: rotate(45deg) translateY(90%);
+    100% {
+        transform: translateX(-50%) translateY(10px); /* Anpassen, wie weit der Pfeil nach unten gehen soll */
     }
 }
+
 
 /* Container-Stile */
 .container {
