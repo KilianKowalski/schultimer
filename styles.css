@@ -79,8 +79,8 @@ header nav ul li a:hover {
 
 .arrow {
     position: absolute;
-    bottom: 20px; /* Abstand zum unteren Rand */
-    left: 50%; /* Horizontal zentrieren */
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
     width: 30px;
     height: 30px;
@@ -94,16 +94,14 @@ header nav ul li a:hover {
         transform: translateX(-50%) translateY(0);
     }
     100% {
-        transform: translateX(-50%) translateY(10px); /* Anpassen, wie weit der Pfeil nach unten gehen soll */
+        transform: translateX(-50%) translateY(10px);
     }
 }
 
-/* Container-Stile */
 .container {
     padding: 80px 20px;
 }
 
-/* Abschnitts-Stile */
 #time, #events {
     text-align: center;
     position: relative;
@@ -174,7 +172,6 @@ header nav ul li a:hover {
     align-items: center;
 }
 
-/* Footer-Stile */
 footer {
     background-color: #333;
     color: white;
@@ -196,7 +193,6 @@ footer ul li a:hover {
     text-decoration: underline;
 }
 
-/* Abschnitt Beschreibung */
 #description {
     background-color: #fff;
     color: #333;
