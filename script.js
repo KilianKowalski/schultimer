@@ -31,12 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fullscreen clock
     fullscreenBtn.addEventListener('click', () => {
+        const timeSection = document.getElementById('time');
         if (!document.fullscreenElement) {
-            document.getElementById('time').requestFullscreen();
-            document.getElementById('time').classList.add('fullscreen');
+            timeSection.requestFullscreen();
+            timeSection.classList.add('fullscreen');
         } else {
             document.exitFullscreen();
-            document.getElementById('time').classList.remove('fullscreen');
+            timeSection.classList.remove('fullscreen');
         }
     });
 
@@ -51,12 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fullscreen event timer
     fullscreenEventBtn.addEventListener('click', () => {
+        const eventsSection = document.getElementById('events');
         if (!document.fullscreenElement) {
-            document.getElementById('events').requestFullscreen();
-            document.getElementById('events').classList.add('fullscreen');
+            eventsSection.requestFullscreen();
+            eventsSection.classList.add('fullscreen');
         } else {
             document.exitFullscreen();
-            document.getElementById('events').classList.remove('fullscreen');
+            eventsSection.classList.remove('fullscreen');
         }
     });
 
