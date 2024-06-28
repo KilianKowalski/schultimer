@@ -100,7 +100,6 @@ header nav ul li a:hover {
     }
 }
 
-
 /* Container-Stile */
 .container {
     padding: 80px 20px;
@@ -110,10 +109,6 @@ header nav ul li a:hover {
 #time, #events {
     text-align: center;
     position: relative;
-}
-
-#time h2, #events h2 {
-    text-align: left;
 }
 
 #clock, #event-timer {
@@ -159,6 +154,19 @@ header nav ul li a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+#time.fullscreen h2, #events.fullscreen h2 {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.5em;
 }
 
 #time.fullscreen, #events.fullscreen {
