@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let lastScroll = 0;
 
-    // Hide/show header on scroll
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
         if (currentScroll > lastScroll) {
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 
-    // Display current time
     function updateTime() {
         const now = new Date();
         const timeString = now.toLocaleTimeString('de-DE', { hour12: false });
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateTime, 1000);
     updateTime();
 
-    // Fullscreen clock
     fullscreenBtn.addEventListener('click', () => {
         const timeSection = document.getElementById('time');
         if (!document.fullscreenElement) {
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Change background color
     colorBtn.addEventListener('click', () => {
         colorPicker.click();
     });
@@ -50,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('time').style.backgroundColor = event.target.value;
     });
 
-    // Fullscreen event timer
     fullscreenEventBtn.addEventListener('click', () => {
         const eventsSection = document.getElementById('events');
         if (!document.fullscreenElement) {
@@ -62,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Change event timer background color
     eventColorBtn.addEventListener('click', () => {
         eventColorPicker.click();
     });
@@ -71,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('events').style.backgroundColor = event.target.value;
     });
 
-    // Timer for next event
     const events = [
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
