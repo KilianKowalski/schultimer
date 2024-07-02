@@ -52,7 +52,6 @@ header nav ul li a:hover {
     background-color: #ddd;
 }
 
-/* Start-Screen-Stile */
 #start-screen {
     display: flex;
     flex-direction: column;
