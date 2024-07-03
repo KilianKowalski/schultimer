@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
         const timeString = now.toLocaleTimeString('de-DE', { hour12: false });
         document.getElementById('clock').textContent = timeString;
+        document.title = timeString;
     }
     setInterval(updateTime, 1000);
     updateTime();
