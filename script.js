@@ -105,3 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         document.querySelector('#events h2').textContent = `Zeit bis zu/r ${nextEvent.name}`;
     }
+
+    setInterval(updateEventTimer, 1000);
+    updateEventTimer();
+});
