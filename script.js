@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let nextEventTime;
         let nextEvent = events.find(event => {
-            const eventTime = new Date(${today}T${event.time}:00);
+            const eventTime = new Date(`${today}T${event.time}:00`);
             return eventTime > now;
         });
 
@@ -92,9 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextDay = new Date(now);
             nextDay.setDate(now.getDate() + 1);
             const nextEventDate = nextDay.toISOString().split('T')[0];
-            nextEventTime = new Date(${nextEventDate}T${nextEvent.time}:00);
+            nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
         } else {
-            nextEventTime = new Date(${today}T${nextEvent.time}:00);
+            nextEventTime = new Date(`${today}T${nextEvent.time}:00`);
         }
 
         const diff = nextEventTime - now;
@@ -102,10 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutes = Math.floor((diff % 3600000) / 60000);
         const seconds = Math.floor((diff % 60000) / 1000);
 
-        document.getElementById('event-timer').textContent = ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')};
-        document.querySelector('#events h2').textContent = Zeit bis zu/r ${nextEvent.name};
+        document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.querySelector('#events h2').textContent = `Zeit bis zu/r ${nextEvent.name}`;
     }
-
-    setInterval(updateEventTimer, 1000);
-    updateEventTimer();
-});
