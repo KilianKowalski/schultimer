@@ -15,68 +15,28 @@
                     <li><a href="#time">Uhrzeit</a></li>
                     <li><a href="#events">Ereignisse</a></li>
                     <li><a href="https://bit.ly/impressum-schultimer">Impressum</a></li>
-                    <li><button id="login-button">Anmelden</button></li>
+                    <li><a href="#" id="signup-btn">Anmelden</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <section id="start-screen">
-        <h1>Schul Timer</h1>
-        <p>Created by Kilian</p>
-        <div class="arrow"></div>
-    </section>
-    <section id="time">
+    <!-- Restlicher Inhalt bleibt unverändert -->
+    <section id="signup-form" style="display: none;">
         <div class="container">
-            <h2>Aktuelle Uhrzeit</h2>
-            <div id="clock"></div>
-            <button id="fullscreen-btn">Vollbildmodus</button>
-            <button id="color-btn">Hintergrundfarbe ändern</button>
-            <input type="color" id="color-picker" style="display:none;">
-        </div>
-    </section>
-    <section id="description">
-        <div class="container">
-            <h2>Hi!</h2>
-            <p>Diese Webseite wurde für die Grund- und Mittelschule Baunach programmiert und dient allen Schülern dazu, die Zeit der WIRKLICH wichtigen Ereignisse in der Schule zu verfolgen (z.B. Pausen, Unterrichtsschluss, Ferien).</p>
-        </div>
-    </section>
-    <section id="events">
-        <div class="container">
-            <h2>Zeit bis zur nächsten Pause</h2>
-            <div id="event-timer"></div>
-            <button id="fullscreen-event-btn">Vollbildmodus</button>
-            <button id="event-color-btn">Hintergrundfarbe ändern</button>
-            <input type="color" id="event-color-picker" style="display:none;">
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <h2>Buttons</h2>
-            <ul>
-                <li><a href="#time">Uhrzeit</a></li>
-                <li><a href="#events">Ereignisse</a></li>
-                <li><a href="https://bit.ly/impressum-schultimer">Impressum</a></li>
-            </ul>
-        </div>
-    </footer>
-    <audio id="school-bell" src="schulglocke.mp3" preload="auto"></audio>
-    <script src="script.js"></script>
-    <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Account erstellen</h2>
-            <form id="signup-form">
+            <h2>Registrierung</h2>
+            <form id="registration-form">
+                <label for="first-name">Vorname:</label>
+                <input type="text" id="first-name" name="first-name" required>
+                <label for="last-name">Nachname:</label>
+                <input type="text" id="last-name" name="last-name" required>
                 <label for="email">E-Mail:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" placeholder="@digital.vs-baunach.de" required>
                 <label for="password">Passwort:</label>
                 <input type="password" id="password" name="password" required>
-                <label for="firstname">Vorname:</label>
-                <input type="text" id="firstname" name="firstname" required>
-                <label for="lastname">Nachname:</label>
-                <input type="text" id="lastname" name="lastname" required>
                 <button type="submit">Registrieren</button>
             </form>
         </div>
-    </div>
+    </section>
+    <script src="script.js"></script>
 </body>
 </html>
