@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('events').style.backgroundColor = event.target.value;
     });
 
-    const events = [#
+    const events = [
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
         { name: '4. Stunde', time: '10:35' },
