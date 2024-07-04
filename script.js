@@ -133,4 +133,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateEventTimer, 1000);
     updateEventTimer();
+
+    const signupBtn = document.getElementById('signup-btn');
+    const signupForm = document.getElementById('signup-form');
+    const registrationForm = document.getElementById('registration-form');
+
+    signupBtn.addEventListener('click', () => {
+        signupForm.style.display = signupForm.style.display === 'none' ? 'block' : 'none';
+    });
+
+    registrationForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (!email.endsWith('@digital.vs-baunach.de')) {
+            alert('Die E-Mail muss auf @digital.vs-baunach.de enden.');
+            return;
+        }
+
+        const userData = {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmed: false,
+            ip: null
+        };
+
+        localStorage.setItem('userData', JSON.stringify(userData));
+        alert('Registrierung erfolgreich. Bitte bestätigen Sie Ihre E-Mail.');
+        console.log('Bestätigungslink gesendet an: ', email); // Simulierte E-Mail-Bestätigung
+    });
+
+    // Checking for existing session
+    const savedUserData = JSON.parse(localStorage.getItem('userData'));
+    if (savedUserData && savedUserData.confirmed && savedUserData.ip === getUserIP()) {
+        alert('Willkommen zurück, ' + savedUserData.firstName + '!');
+    }
+
+    function getUserIP() {
+        // Simulierte IP-Adresse
+        return '127.0.0.1';
+    }
 });
