@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const events = [#
-        { name: '2. Stunde', time: '08:45' },
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
         { name: '4. Stunde', time: '10:35' },
