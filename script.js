@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (day === 0 || day === 6) {
             const nextMonday = new Date(now);
             nextMonday.setDate(now.getDate() + ((1 + 7 - day) % 7));
-            nextMonday.setHours(8, 0, 0, 0); // School starts at 08:00 on Monday
+            nextMonday.setHours(8, 0, 0, 0);
             const diff = nextMonday - now;
             const hours = Math.floor(diff / 3600000);
             const minutes = Math.floor((diff % 3600000) / 60000);
