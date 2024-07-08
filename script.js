@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const hours = Math.floor(diff / 3600000);
             const minutes = Math.floor((diff % 3600000) / 60000);
             const seconds = Math.floor((diff % 60000) / 1000);
-            
+
             document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             document.querySelector('#events h2').textContent = "Zeit bis zum Schulbeginn am Montag";
             return;
@@ -117,12 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return eventTime > now;
         });
 
-        if (!nextEvent) {
+        if (!nextEvent && now.getHours() >= 8) {
             nextEvent = { name: 'Schulbeginn', time: '08:00' };
             const nextDay = new Date(now);
             nextDay.setDate(now.getDate() + ((1 + 7 - day) % 7));
             const nextEventDate = nextDay.toISOString().split('T')[0];
             nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
+        } else if (!nextEvent) {
+            nextEventTime = new Date(`${today}T08:00:00`);
         } else {
             nextEventTime = new Date(`${today}T${nextEvent.time}:00`);
         }
