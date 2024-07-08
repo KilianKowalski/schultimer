@@ -117,14 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return eventTime > now;
         });
 
-        if (!nextEvent && now.getHours() >= 8) {
+        if (!nextEvent) {
+            // No more events today, set to next school day at 08:00
+            let nextDay = new Date(now);
+            do {
+                nextDay.setDate(nextDay.getDate() + 1);
+            } while (nextDay.getDay() === 0 || nextDay.getDay() === 6);
+            
             nextEvent = { name: 'Schulbeginn', time: '08:00' };
-            const nextDay = new Date(now);
-            nextDay.setDate(now.getDate() + ((1 + 7 - day) % 7));
             const nextEventDate = nextDay.toISOString().split('T')[0];
             nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
-        } else if (!nextEvent) {
-            nextEventTime = new Date(`${today}T08:00:00`);
         } else {
             nextEventTime = new Date(`${today}T${nextEvent.time}:00`);
         }
