@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: '4. Stunde', time: '10:35' },
         { name: '2. Pause', time: '11:20' },
         { name: '5. Stunde', time: '11:35' },
-        { name: 'Mittagspause', time: '12:20' },
         { name: 'Schulschluss', time: '13:05' }
     ];
 
@@ -118,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (!nextEvent) {
-            // No more events today, set to next school day at 08:00
             let nextDay = new Date(now);
             do {
                 nextDay.setDate(nextDay.getDate() + 1);
