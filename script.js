@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: '4. Stunde', time: '10:35' },
         { name: '2. Pause', time: '11:20' },
         { name: '5. Stunde', time: '11:35' },
-        { name: '6. Stunde', time: '15:15'},
+        { name: '6. Stunde', time: '12:15'},
         { name: 'Schulschluss', time: '13:05' }
     ];
 
