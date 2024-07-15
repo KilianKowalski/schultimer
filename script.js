@@ -74,9 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: '2. Pause', time: '11:20' },
         { name: '5. Stunde', time: '11:35' },
         { name: 'Mittagspause', time: '12:20' },
-        { name: 'Lernzeit', time: '13:15' },
-        { name: 'Nachmittagsunterricht', time: '14:00' },
-        { name: 'Schulschluss', time: '15:30' }
+        { name: 'Lernzeit', time: '12:30' },
+        { name: 'Schulschluss', time: '13:05' }
     ];
 
     const fridayEvents = [
@@ -84,10 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
         { name: '4. Stunde', time: '10:35' },
-        { name: '2. Pause', time: '11:20' },
-        { name: '5. Stunde', time: '11:35' },
-        { name: '6. Stunde', time: '12:15'},
-        { name: 'Schulschluss', time: '13:05' }
+        { name: '2. Pause', time: '09:15' },
+        { name: '5. Stunde', time: '10:00' },
+        { name: '6. Stunde', time: '10:45'},
+        { name: 'Wochenende', time: '11:20' }
     ];
 
     function updateEventTimer() {
