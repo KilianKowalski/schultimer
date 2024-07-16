@@ -67,25 +67,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const events = [
+        { name: 'Schulbeginn', time: '08:00' },
         { name: '2. Stunde', time: '08:45' },
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
         { name: '4. Stunde', time: '10:35' },
         { name: '2. Pause', time: '11:20' },
         { name: '5. Stunde', time: '11:35' },
-        { name: 'Mittagspause', time: '12:20' },
-        { name: 'Lernzeit', time: '12:30' },
+        { name: 'Lernzeit', time: '12:20' },
         { name: 'Schulschluss', time: '13:05' }
     ];
 
     const fridayEvents = [
+        { name: 'Schulbeginn', time: '08:00'},
         { name: '2. Stunde', time: '08:45' },
         { name: 'Pause', time: '09:30' },
         { name: '3. Stunde', time: '09:50' },
         { name: '4. Stunde', time: '10:35' },
-        { name: '2. Pause', time: '09:15' },
-        { name: '5. Stunde', time: '10:00' },
-        { name: '6. Stunde', time: '10:45'},
         { name: 'Wochenende', time: '11:20' }
     ];
 
