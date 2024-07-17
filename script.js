@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 nextDay.setDate(nextDay.getDate() + 1);
             } while (nextDay.getDay() === 0 || nextDay.getDay() === 6);
             
-            nextEvent = { name: 'Schulbeginn', time: '08:00' };
+            nextEvent = { name: 'zum Schulbeginn', time: '08:00' };
             const nextEventDate = nextDay.toISOString().split('T')[0];
             nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
         } else {
