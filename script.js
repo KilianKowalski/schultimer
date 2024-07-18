@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('header');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
@@ -99,63 +97,49 @@ document.addEventListener('DOMContentLoaded', () => {
             nextMonday.setDate(now.getDate() + ((1 + 7 - day) % 7));
             nextMonday.setHours(8, 0, 0, 0);
             const diff = nextMonday - now;
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            const hours = Math.floor(diff / 3600000);
+            const minutes = Math.floor((diff % 3600000) / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
 
             document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.querySelector('#events h2').textContent = "Zeit bis zum Schulbeginn am Montag";
+            return;
+        }
+
+        const dayEvents = (day === 5) ? fridayEvents : events;
+
+        let nextEventTime;
+        let nextEvent = dayEvents.find(event => {
+            const eventTime = new Date(`${today}T${event.time}:00`);
+            return eventTime > now;
+        });
+
+        if (!nextEvent) {
+            let nextDay = new Date(now);
+            do {
+                nextDay.setDate(nextDay.getDate() + 1);
+            } while (nextDay.getDay() === 0 || nextDay.getDay() === 6);
+            
+            nextEvent = { name: 'zum Schulbeginn', time: '08:00' };
+            const nextEventDate = nextDay.toISOString().split('T')[0];
+            nextEventTime = new Date(`${nextEventDate}T${nextEvent.time}:00`);
         } else {
-            let nextEvent = null;
-            const eventsToday = day === 5 ? fridayEvents : events;
+            nextEventTime = new Date(`${today}T${nextEvent.time}:00`);
+        }
 
-            for (let i = 0; i < eventsToday.length; i++) {
-                const eventTime = new Date(`${today}T${eventsToday[i].time}:00`);
-                if (eventTime > now) {
-                    nextEvent = eventTime;
-                    break;
-                }
-            }
+        const diff = nextEventTime - now;
+        const hours = Math.floor(diff / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
 
-            if (nextEvent) {
-                const diff = nextEvent - now;
-                const hours = Math.floor(diff / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.querySelector('#events h2').textContent = `Zeit bis ${nextEvent.name}`;
 
-                document.getElementById('event-timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            } else {
-                document.getElementById('event-timer').textContent = '00:00:00';
-            }
+        if (hours === 0 && minutes === 0 && seconds === 0) {
+            schoolBell.play();
         }
     }
+
     setInterval(updateEventTimer, 1000);
     updateEventTimer();
-
-    const loginBtn = document.getElementById('login-btn');
-    const usernameInput = document.getElementById('username');
-    const pinInput = document.getElementById('pin');
-    const welcomeMessage = document.getElementById('welcome-message');
-    const privateContent = document.getElementById('private-content');
-    const userGreeting = document.getElementById('user-greeting');
-
-    loginBtn.addEventListener('click', () => {
-        const username = usernameInput.value.trim();
-        const pin = pinInput.value.trim();
-
-        if (username === 'admin' && pin === '1234') {
-            welcomeMessage.textContent = `Willkommen, ${username}!`;
-            welcomeMessage.classList.remove('hidden');
-            privateContent.classList.remove('hidden');
-            userGreeting.textContent = `Hallo, ${username}!`;
-            setTimeout(() => {
-                welcomeMessage.classList.add('hidden');
-            }, 3000);
-        } else {
-            alert('Ungültige Anmeldedaten.');
-        }
-
-        // Zurücksetzen der Eingabefelder
-        usernameInput.value = '';
-        pinInput.value = '';
-    });
 });
