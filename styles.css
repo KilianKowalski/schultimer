@@ -1,8 +1,13 @@
+/* styles.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: rgb(159, 174, 193);
     color: #333;
+}
+
+.hidden {
+    display: none;
 }
 
 header {
@@ -162,13 +167,6 @@ header nav ul li a:hover {
     text-align: center;
     padding: 10px 0;
     font-size: 1.5em;
-}
-
-#time.fullscreen, #events.fullscreen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 footer {
