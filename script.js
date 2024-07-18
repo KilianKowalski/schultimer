@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventColorBtn = document.getElementById('event-color-btn');
     const eventColorPicker = document.getElementById('event-color-picker');
     const schoolBell = document.getElementById('school-bell');
+    const privateSection = document.getElementById('private-section');
+    const usernameDisplay = document.getElementById('username-display');
+    const gamesBtn = document.getElementById('games-btn');
+    const loginBtn = document.getElementById('login-btn');
+    const pinInput = document.getElementById('pin-input');
 
     let lastScroll = 0;
 
@@ -142,4 +147,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateEventTimer, 1000);
     updateEventTimer();
+
+    loginBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch('users.json'); // Lade die Benutzerdaten
+            const users = await response.json(); // Konvertiere die Antwort in ein JSON-Objekt
+            const username = document.getElementById('username-input').value;
+            const pin = pinInput.value;
+
+            const user = users.find(u => u.username === username && u.pin === pin);
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                privateSection.classList.remove('hidden');
+                usernameDisplay.textContent = `Willkommen, ${user.username}!`;
+            } else {
+                alert('Falscher Benutzername oder PIN.');
+            }
+        } catch (error) {
+            console.error('Fehler beim Laden der Benutzerdaten:', error);
+            alert('Es gab ein Problem beim Laden der Benutzerdaten.');
+        }
+    });
+
+    gamesBtn.addEventListener('click', () => {
+        window.open('https://bit.ly/m/schultimer-unblocked-games', '_blank');
+    });
+
+    // Function to show username in private section if logged in
+    function showUsername() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            privateSection.classList.remove('hidden');
+            usernameDisplay.textContent = `Willkommen, ${currentUser.username}!`;
+        }
+    }
+
+    showUsername();
 });
+
