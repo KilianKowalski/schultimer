@@ -142,30 +142,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateEventTimer, 1000);
     updateEventTimer();
-
-    // Check if user is authenticated
-    const isAuthenticated = checkAuthentication(); // Replace with your authentication logic
-
-    if (isAuthenticated) {
-        const privateArea = document.getElementById('private-area');
-        privateArea.classList.remove('hidden');
-        const username = getUsername(); // Replace with logic to get username
-        document.getElementById('welcome-message').textContent = `Willkommen, ${username}!`;
-        const gamesBtn = document.getElementById('games-btn');
-        gamesBtn.addEventListener('click', () => {
-            window.open('https://bit.ly/m/schultimer-unblocked-games', '_blank');
-        });
-    }
-
-    function checkAuthentication() {
-        // Implement your authentication logic here
-        // For demonstration purposes, returning true
-        return true;
-    }
-
-    function getUsername() {
-        // Implement logic to get the username
-        // For demonstration purposes, returning a sample username
-        return 'Max Mustermann';
-    }
 });
