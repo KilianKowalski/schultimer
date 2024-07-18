@@ -1,4 +1,5 @@
 [
     { "username": "Admin", "pin": "1234" },
-    { "username": "Kilian", "pin": "5678" }
+    { "username": "Kilian", "pin": "5678" },
+    { "username": "Hallo", "pin": "0000" }
 ]
