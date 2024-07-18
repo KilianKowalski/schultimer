@@ -143,43 +143,29 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateEventTimer, 1000);
     updateEventTimer();
 
-    // Login functionality
-    const privateArea = document.getElementById('private-area');
-    const loginForm = document.createElement('form');
-    loginForm.innerHTML = `
-        <label for="username">Benutzername:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="pin">PIN:</label>
-        <input type="password" id="pin" name="pin" maxlength="4" required>
-        <button type="submit">Anmelden</button>
-    `;
-    privateArea.appendChild(loginForm);
+    // Check if user is authenticated
+    const isAuthenticated = checkAuthentication(); // Replace with your authentication logic
 
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const username = loginForm.username.value.trim();
-        const pin = loginForm.pin.value.trim();
+    if (isAuthenticated) {
+        const privateArea = document.getElementById('private-area');
+        privateArea.classList.remove('hidden');
+        const username = getUsername(); // Replace with logic to get username
+        document.getElementById('welcome-message').textContent = `Willkommen, ${username}!`;
+        const gamesBtn = document.getElementById('games-btn');
+        gamesBtn.addEventListener('click', () => {
+            window.open('https://bit.ly/m/schultimer-unblocked-games', '_blank');
+        });
+    }
 
-        // Hier wäre der Code, um die Benutzerdaten aus einer Datenbank oder JSON-Datei zu überprüfen
-        fetch('users.json')
-            .then(response => response.json())
-            .then(users => {
-                const user = users.find(u => u.username === username && u.pin === pin);
-                if (user) {
-                    // Anmeldung erfolgreich
-                    document.getElementById('welcome-message').textContent = `Willkommen, ${user.username}!`;
-                    privateArea.classList.remove('hidden');
-                } else {
-                    // Anmeldung fehlgeschlagen
-                    alert('Ungültige Anmeldedaten.');
-                }
-            })
-            .catch(error => console.error('Error fetching users:', error));
-    });
+    function checkAuthentication() {
+        // Implement your authentication logic here
+        // For demonstration purposes, returning true
+        return true;
+    }
 
-    // Spiele-Button im privaten Bereich
-    const gamesBtn = document.getElementById('games-btn');
-    gamesBtn.addEventListener('click', () => {
-        window.open('https://bit.ly/m/schultimer-unblocked-games', '_blank');
-    });
+    function getUsername() {
+        // Implement logic to get the username
+        // For demonstration purposes, returning a sample username
+        return 'Max Mustermann';
+    }
 });
