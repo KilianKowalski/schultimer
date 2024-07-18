@@ -164,6 +164,13 @@ header nav ul li a:hover {
     font-size: 1.5em;
 }
 
+#time.fullscreen, #events.fullscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 footer {
     background-color: #333;
     color: white;
@@ -203,13 +210,30 @@ footer ul li a:hover {
     line-height: 1.5;
 }
 
-#private-section {
-    background-color: #f0f0f0;
-    padding: 40px 20px;
-    text-align: center;
-    border-top: 1px solid #ccc;
+/* Versteckter Bereich nur für eingeloggte Benutzer */
+#private-area {
+    display: none;
 }
 
-#private-section.hidden {
-    display: none;
+#private-area .container {
+    text-align: center;
+}
+
+#private-area form {
+    margin-bottom: 20px;
+}
+
+#private-area form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#private-area form input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#private-area form button {
+    padding: 10px 20px;
+    cursor: pointer;
 }
