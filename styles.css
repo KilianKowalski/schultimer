@@ -1,209 +1,59 @@
 /* styles.css */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: rgb(159, 174, 193);
-    color: #333;
-}
-
-.hidden {
-    display: none;
-}
-
-header {
+#private-section {
     position: fixed;
-    width: 100%;
     top: 0;
     left: 0;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    z-index: 1000;
-    transition: top 0.3s;
-    padding: 10px 0;
-}
-
-header.hidden {
-    top: -100px;
-}
-
-header .container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-header .logo {
-    height: 50px;
-}
-
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 15px;
-}
-
-header nav ul li a {
-    text-decoration: none;
-    color: #333;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-header nav ul li a:hover {
-    background-color: #ddd;
-}
-
-#start-screen {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: url('background_hallo.png') no-repeat center center/cover;
+    z-index: 1000;
+}
+
+#private-section .container {
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     text-align: center;
-    color: white;
-    position: relative;
 }
 
-#start-screen h1 {
-    font-size: 4em;
-    margin: 0;
+#private-section h2 {
+    margin-top: 0;
+    font-size: 2em;
 }
 
-#start-screen p {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    font-size: 1.2em;
+#private-section input {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.arrow {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: white;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    animation: arrowDown 1s infinite alternate;
-}
-
-@keyframes arrowDown {
-    0% {
-        transform: translateX(-50%) translateY(0);
-    }
-    100% {
-        transform: translateX(-50%) translateY(10px);
-    }
-}
-
-.container {
-    padding: 80px 20px;
-}
-
-#time, #events {
-    text-align: center;
-    position: relative;
-}
-
-#clock, #event-timer {
-    font-size: 5em;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-#fullscreen-btn, #color-btn, #fullscreen-event-btn, #event-color-btn {
-    display: block;
-    margin: 10px auto;
+#private-section button {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
 }
 
-#fullscreen-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+#private-section button:hover {
+    background-color: #45a049;
 }
 
-#color-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-#fullscreen-event-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-}
-
-#event-color-btn {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-#time.fullscreen #clock, #events.fullscreen #event-timer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#time.fullscreen h2, #events.fullscreen h2 {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 1.5em;
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-}
-
-footer ul {
-    list-style: none;
-    padding: 0;
-}
-
-footer ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-footer ul li a:hover {
-    text-decoration: underline;
-}
-
-#description {
-    background-color: #fff;
-    color: #333;
-    padding: 40px 20px;
-    text-align: left;
-    border-radius: 8px;
-}
-
-#description h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-}
-
-#description p {
+#private-section p {
     font-size: 1.2em;
-    line-height: 1.5;
+    margin-top: 10px;
+}
+
+#private-section .hidden {
+    display: none;
 }
