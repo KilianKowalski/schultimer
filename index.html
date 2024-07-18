@@ -7,60 +7,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header id="header">
-        <div class="container">
-            <img src="logo.png" alt="Logo" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="#time">Uhrzeit</a></li>
-                    <li><a href="#events">Ereignisse</a></li>
-                    <li><a href="https://bit.ly/impressum-schultimer "target=_blank">Impressum</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <section id="start-screen">
-        <h1>Schul Timer</h1>
-        <p>Created by Kilian</p>
-        <div class="arrow"></div>
-    </section>
-    <section id="time">
-        <div class="container">
-            <h2>Aktuelle Uhrzeit</h2>
-            <div id="clock"></div>
-            <button id="fullscreen-btn">Vollbildmodus</button>
-            <button id="color-btn">Hintergrundfarbe ändern</button>
-            <input type="color" id="color-picker" style="display:none;">
-        </div>
-    </section>
-    <section id="description">
-        <div class="container">
-            <h2>Hi!</h2>
-            <p>Diese Webseite wurde für die Grund- und Mittelschule Baunach programmiert und dient allen Schülern dazu, die Zeit der WIRKLICH wichtigen Ereignisse in der Schule zu verfolgen (z.B. Pausen, Unterrichtsschluss).</p>
-            <p>Die Seite ist noch in Arbeit! Es könnten Fehlinformationen vorhanden sein<p>
-        </div>
-    </section>
-    <section id="events">
-        <div class="container">
-            <h2>Zeit bis zur nächsten Pause</h2>
-            <div id="event-timer"></div>
-            <button id="fullscreen-event-btn">Vollbildmodus</button>
-            <button id="event-color-btn">Hintergrundfarbe ändern</button>
-            <input type="color" id="event-color-picker" style="display:none;">
-        </div>
-    </section>
+    <!-- bestehender Code -->
+
     <footer>
         <div class="container">
             <h2>Buttons</h2>
             <ul>
                 <li><a href="#time">Uhrzeit</a></li>
                 <li><a href="#events">Ereignisse</a></li>
-                <li><a href="https://bit.ly/m/schultimer-unblocked-games"target=_blank">Spiele</a></li>
-                <li><a href="https://bit.ly/impressum-schultimer">Impressum</a></li>
+                <li><a href="https://bit.ly/m/schultimer-unblocked-games" target="_blank">Spiele</a></li>
+                <li><a href="https://bit.ly/impressum-schultimer" target="_blank">Impressum</a></li>
             </ul>
         </div>
     </footer>
-    <audio id="school-bell" src="schulglocke.mp3" preload="auto"></audio>
+
+    <div id="private-section" class="hidden">
+        <div id="login-form">
+            <h2>Privater Bereich</h2>
+            <label for="username">Benutzername:</label>
+            <input type="text" id="username">
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin">
+            <button id="login-btn">Anmelden</button>
+            <p id="welcome-message" class="hidden"></p>
+        </div>
+        <div id="private-content" class="hidden">
+            <p id="user-greeting"></p>
+            <button onclick="window.open('https://bit.ly/m/schultimer-unblocked-games', '_blank')">Spiele</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
