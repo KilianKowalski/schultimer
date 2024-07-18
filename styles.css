@@ -245,3 +245,16 @@ footer ul li a:hover {
 #private-area:not(.hidden) {
     display: block;
 }
+
+#private-area {
+    background-color: #f0f0f0; /* Hintergrundfarbe für den privaten Bereich */
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Schatten für den Bereich */
+}
+
+/* Versteckt den privaten Bereich standardmäßig */
+#private-area.hidden {
+    display: none;
+}
