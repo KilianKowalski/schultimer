@@ -237,3 +237,11 @@ footer ul li a:hover {
     padding: 10px 20px;
     cursor: pointer;
 }
+
+#private-area {
+    display: none;
+}
+
+#private-area:not(.hidden) {
+    display: block;
+}
