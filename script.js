@@ -66,26 +66,29 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('events').style.backgroundColor = event.target.value;
     });
 
-    const events = [
-        { name: 'zum Schulbeginn', time: '08:00' },
-        { name: 'zur 2.Stunde', time: '08:45' },
-        { name: 'zur Pause', time: '09:30' },
-        { name: 'zur 3. Stunde', time: '09:50' },
-        { name: 'zur 4. Stunde', time: '10:35' },
-        { name: 'zur 2. Pause', time: '11:20' },
-        { name: 'zur 5. Stunde', time: '11:35' },
-        { name: 'zur Lernzeit', time: '12:20' },
-        { name: 'zum Schulschluss', time: '13:05' }
-    ];
+const events = [
+    { name: '2. Stunde', time: '08:45' },
+    { name: 'Pause', time: '09:30' },
+    { name: '3. Stunde', time: '09:50' },
+    { name: '4. Stunde', time: '10:35' },
+    { name: '2. Pause', time: '11:20' },
+    { name: '5. Stunde', time: '11:35' },
+    { name: 'Mittagspause', time: '12:20' },
+    { name: 'Lernzeit', time: '13:15' },
+    { name: 'Nachmittagsunterricht', time: '14:00' },
+    { name: 'Schulschluss', time: '15:30' }
+];
 
-    const fridayEvents = [
-        { name: 'zum Schulbeginn', time: '08:00'},
-        { name: 'zur 2. Stunde', time: '08:45' },
-        { name: 'zur Pause', time: '09:30' },
-        { name: 'zur 3. Stunde', time: '09:50' },
-        { name: 'zur 4. Stunde', time: '10:35' },
-        { name: 'zum Wochenende', time: '11:20' }
-    ];
+const fridayEvents = [
+    { name: '2. Stunde', time: '08:45' },
+    { name: 'Pause', time: '09:30' },
+    { name: '3. Stunde', time: '09:50' },
+    { name: '4. Stunde', time: '10:35' },
+    { name: '2. Pause', time: '11:20' },
+    { name: '5. Stunde', time: '11:35' },
+    { name: '6. Stunde', time: '12:15'},
+    { name: 'Schulschluss', time: '13:05' }
+];
 
     function updateEventTimer() {
         const now = new Date();
