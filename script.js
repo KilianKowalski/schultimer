@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const events = [
         { name: 'zum Schulbeginn', time: '08:00' },
         { name: 'zur 2.Stunde', time: '08:45' },
-        { name: 'zur Pause', time: '09:04' },
+        { name: 'zur Pause', time: '09:30' },
         { name: 'zur 3. Stunde', time: '09:50' },
         { name: 'zur 4. Stunde', time: '10:35' },
         { name: 'zur 2. Pause', time: '11:20' },
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fridayEvents = [
         { name: 'zum Schulbeginn', time: '08:00'},
         { name: 'zur 2. Stunde', time: '08:45' },
-        { name: 'zur Pause', time: '09:30' },
+        { name: 'zur Pause', time: '09:04' },
         { name: 'zur 3. Stunde', time: '09:50' },
         { name: 'zur 4. Stunde', time: '10:35' },
         { name: 'zum Wochenende', time: '11:20' }
