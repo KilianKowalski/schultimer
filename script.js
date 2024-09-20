@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'zur 4. Stunde', time: '10:35' },
         { name: 'zur 2. Pause', time: '11:20' },
         { name: 'zur 5. Stunde', time: '11:35' },
-        { name: 'zur Lernzeit', time: '12:20' },
+        { name: 'zur ', time: '12:20' },
         { name: 'zum Schulschluss', time: '13:05' }
     ];
 
@@ -84,7 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'zur Pause', time: '09:30' },
         { name: 'zur 3. Stunde', time: '09:50' },
         { name: 'zur 4. Stunde', time: '10:35' },
-        { name: 'zum Wochenende', time: '11:20' }
+        { name: 'zur Pause', time: '11:20' }
+        { name: 'zur 5. Stunde', time: '11:35' }
+        { name: 'zur 6.Stunde', time: '12:20' }
+        { name: 'zum Wochenende', time: '13:05' }
     ];
 
     function updateEventTimer() {
