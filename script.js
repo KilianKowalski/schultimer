@@ -73,8 +73,8 @@ const events = [
     { name: 'zur 4. Stunde', time: '10:35' },
     { name: 'zur 2. Pause', time: '11:20' },
     { name: 'zur 5. Stunde', time: '11:35' },
-    { name: 'zur Mittagspause (heute 6. Stunde)', time: '12:20' },
-    { name: 'zum Schulschluss', time: '13:05' },
+    { name: 'zur 6. Stunde', time: '12:20' },
+    { name: 'zur Mittagspause', time: '13:15' },
     { name: 'zum Nachmittagsunterricht', time: '14:00' },
     { name: 'zum Schulschluss', time: '15:30' }
 ];
