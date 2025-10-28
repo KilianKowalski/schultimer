@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schultimer 2 — Countdown zur nächsten Pause</title>
+  <meta name="description" content="Schultimer 2 — Private Schülerseite. Countdown bis Schulstart, Pause oder Schulschluss (Bayern).">
+  <meta name="author" content="Kilian Reg (Schultimer 2)" />
+  <link rel="icon" href="favicon.ico">
+  <style>
+    :root{
+      --bg:#071026;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --accent1: #6ee7b7;
+      --accent2: #60a5fa;
+      --accent3: #c084fc;
+      --rounded: 16px;
+      --maxw:1100px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071022);color:#e6eef8}
+    a{color:inherit}
+
+    header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:24px}
+    .nav{display:flex;align-items:center;gap:14px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .mark{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;box-shadow:0 12px 40px rgba(6,8,25,0.7);animation:float 5.6s ease-in-out infinite}
+    .mark img{width:44px;height:44px;object-fit:contain;border-radius:8px}
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+    .logo h1{font-size:18px;margin:0}
+    .logo p{margin:0;font-size:12px;opacity:0.85}
+
+    .hero{min-height:68vh;display:grid;place-items:center;padding:48px 20px;position:relative;overflow:hidden}
+    /* hero background uses <picture> with WebP + JPG fallback */
+    .hero picture, .hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .hero .overlay{position:absolute;inset:0;background:linear-gradient(rgba(7,10,32,0.55), rgba(6,8,25,0.55));pointer-events:none}
+
+    .hero .card{width:100%;max-width:980px;padding:44px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 18px 60px rgba(2,6,23,0.6);backdrop-filter: blur(10px);border:1px solid rgba(255,255,255,0.03);display:grid;place-items:center;gap:12px;text-align:center;position:relative;z-index:2}
+    .hero h2{font-size:34px;margin:0}
+    .hero p{margin:0;opacity:0.9}
+
+    section.timer-area{padding:44px 20px}
+    .timer-wrap{max-width:920px;margin:0 auto;background:var(--card);padding:26px;border-radius:18px;box-shadow:0 12px 40px rgba(2,6,23,0.6);display:grid;gap:12px;position:relative}
+    .next-label{font-size:13px;opacity:0.94;text-transform:uppercase;letter-spacing:1px}
+    .countdown{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+    .count-seg{min-width:120px;padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
+    .count-seg .num{font-size:44px;font-weight:800;letter-spacing:1px}
+    .count-seg .label{font-size:12px;opacity:0.86}
+
+    .controls{display:flex;justify-content:center;gap:12px;margin-top:6px}
+    button.btn{padding:12px 18px;border-radius:999px;border:0;cursor:pointer;font-weight:700;background:var(--glass);backdrop-filter: blur(6px);color:inherit}
+    button.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061126;box-shadow:0 10px 30px rgba(99,102,241,0.12)}
+
+    /* Fullscreen (timer-only) */
+    body.fs-active header, body.fs-active .hero, body.fs-active footer{display:none}
+    body.fs-active .next-label{display:none}
+
+    body.fs-active .timer-wrap{position:fixed;inset:0;border-radius:0;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .fs-top{position:absolute;top:18px;left:50%;transform:translateX(-50%);text-align:center}
+    .fs-top .info{font-size:18px;font-weight:700;opacity:0.95}
+    .fs-big{font-size:96px;font-weight:900;letter-spacing:2px}
+
+    footer{padding:24px 0;margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
+    footer .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
+
+    .muted{opacity:0.8;font-size:13px}
+    .reveal{opacity:0;transform:translateY(18px);transition:all 700ms cubic-bezier(.2,.9,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media (max-width:720px){
+      .count-seg{min-width:86px;padding:12px}
+      .hero h2{font-size:24px}
+      .fs-big{font-size:46px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="mark" aria-hidden>
+          <!-- header logo: place your file as "header_logo.png" next to index.html -->
+          <img src="header_logo.png" alt="Schultimer 2 Logo" width="44" height="44">
+        </div>
+        <div>
+          <h1>Schultimer 2</h1>
+          <p>Privatprojekt — nicht-offizielle Schulseite</p>
+        </div>
+      </div>
+      <div style="margin-left:auto" class="muted">Keine Schul-Website — privat erstellt</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <!-- use <picture> so WebP wird geladen, JPG ist Fallback -->
+      <picture aria-hidden>
+        <source srcset="background.webp" type="image/webp">
+        <img src="background.jpg" alt="" />
+      </picture>
+      <div class="overlay" aria-hidden></div>
+
+      <div class="container">
+        <div class="card reveal">
+          <h2>Er ist endlich wieder da!</h2>
+          <p>Wir haben es geschafft: Schultimer ist nach zwei Jahren wieder online! Seit die Website offline genommen wurde, hat sich viel getan. Ich hoffe, ihr könnt euch mit dem neuen Design abfinden.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="timer-area">
+      <div class="timer-wrap reveal" id="timerWrap">
+        <div class="next-label" id="nextLabel">Zeit bis ...</div>
+        <div class="countdown" id="countdown">
+          <!-- JS füllt hier die Segmente -->
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="fsBtn">Vollbild</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-inner">
+      <div class="muted">Schultimer 2 — Keine Verbindung zu einer Schule. Privatprojekt.</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // -----------------------------------------------------------
+    // Schultimer 2 - Produktionsdatei (WebP background)
+    // - Platziere: background.webp + background.jpg + header_logo.png + favicon.ico neben index.html
+    // - Ich hab auch den Datum-Fix für Sommerferien 2025 korrigiert (2025-09-09)
+    // -----------------------------------------------------------
+
+    function toDateOnDay(dayDate, hhmm){
+      const [h,m] = hhmm.split(':').map(Number);
+      return new Date(dayDate.getFullYear(), dayDate.getMonth(), dayDate.getDate(), h, m, 0, 0);
+    }
+
+    const SCHEDULE = {
+      1: [['08:00','zum Schulbeginn'],['08:45','zur 2. Stunde'],['09:30','zur 1. Pause'],['09:50','zur 3. Stunde'],['10:35','zur 4. Stunde'],['11:20','zur 2. Pause'],['11:35','zur 5. Stunde'],['12:20','zur 6. Stunde'],['13:05','zurMittagspause'],['14:00','Nachmittagsunterricht'],['15:30','Schulschluss']],
+      2: [['08:00','zum Schulbeginn'],['08:45','zur 2. Stunde'],['09:30','zur 1. Pause'],['09:50','zur 3. Stunde'],['10:35','zur 4. Stunde'],['11:20','zur 2. Pause'],['11:35','zur 5. Stunde'],['12:20','zur 6. Stunde'],['13:05','zur Mittagspause'],['14:00','Nachmittagsunterricht'],['15:30','Schulschluss']],
+      3: [['08:00','zum Schulbeginn'],['08:45','zur 2. Stunde'],['09:30','zur 1. Pause'],['09:50','zur 3. Stunde'],['10:35','zur 4. Stunde'],['11:20','zur 2. Pause'],['11:35','zur 5. Stunde'],['12:20','zur 6. Stunde'],['13:05','zum Schulschluss']],
+      4: [['08:00','zum Schulbeginn'],['08:45','zur 2. Stunde'],['09:30','zur 1. Pause'],['09:50','zur 3. Stunde'],['10:35','zur 4. Stunde'],['11:20','zur 2. Pause'],['11:35','zur 5. Stunde'],['12:20','zur 6. Stunde'],['13:05','zum Schulschluss']],
+      5: [['08:00','zum Schulbeginn'],['08:45','zur 2. Stunde'],['09:30','zur 1. Pause'],['09:50','zur 3. Stunde'],['10:35','zur 4. Stunde'],['11:20','zur 2. Pause'],['11:35','zur 5. Stunde'],['12:20','zur 6. Stunde'],['13:05','zum Wochenende']]
+    };
+
+    const HOLIDAYS = [
+      {start:'2024-10-28', end:'2024-10-31', name:'Unterrichtsfreie Tage (Allerheiligen) 2024'},
+      {start:'2024-12-23', end:'2025-01-03', name:'Weihnachtsferien 2024/25'},
+      {start:'2025-03-03', end:'2025-03-07', name:'Frühjahrsferien 2025'},
+      {start:'2025-04-14', end:'2025-04-25', name:'Osterferien 2025'},
+      {start:'2025-06-10', end:'2025-06-20', name:'Pfingstferien 2025'},
+      {start:'2025-07-29', end:'2025-09-09', name:'Sommerferien 2025'}
+    ].map(r=>({start:new Date(r.start+'T00:00:00'), end:new Date(r.end+'T23:59:59'), name:r.name}));
+
+    function inHoliday(date){
+      return HOLIDAYS.find(h=> date >= h.start && date <= h.end) || null;
+    }
+
+    function findNextEvent(fromDate = new Date()){
+      const now = new Date(fromDate);
+      const curHoliday = inHoliday(now);
+      if(curHoliday){
+        let d = new Date(curHoliday.end);
+        d.setDate(d.getDate()+1);
+        for(let i=0;i<120;i++){
+          if(!inHoliday(d) && SCHEDULE[d.getDay()]){
+            const ev = SCHEDULE[d.getDay()][0];
+            return {date: toDateOnDay(d, ev[0]), label: ev[1], special: `Ferien: ${curHoliday.name}`};
+          }
+          d.setDate(d.getDate()+1);
+        }
+      }
+
+      for(let offset=0; offset<30; offset++){
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate()+offset);
+        if(inHoliday(d)) continue;
+        const daySchedule = SCHEDULE[d.getDay()];
+        if(!daySchedule) continue;
+        for(const [time,label] of daySchedule){
+          const evDate = toDateOnDay(d, time);
+          if(evDate > now) return {date:evDate, label};
+        }
+      }
+
+      for(let i=31;i<365;i++){
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate()+i);
+        if(!inHoliday(d) && SCHEDULE[d.getDay()]){
+          const ev = SCHEDULE[d.getDay()][0];
+          return {date: toDateOnDay(d, ev[0]), label: ev[1]};
+        }
+      }
+      return null;
+    }
+
+    const nextLabelEl = document.getElementById('nextLabel');
+    const countdownEl = document.getElementById('countdown');
+    const timerWrap = document.getElementById('timerWrap');
+
+    function pad(n){return String(n).padStart(2,'0')}
+
+    function renderTimer(ms){
+      if(ms < 0) ms = 0;
+      const totalSec = Math.floor(ms/1000);
+      const days = Math.floor(totalSec / 86400);
+      const hours = Math.floor((totalSec % 86400) / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+
+      const daysPart = days > 0 ? `<div class=\"count-seg\"><div class=\"num\">${pad(days)}</div><div class=\"label\">Tage</div></div>` : '';
+
+      if(document.fullscreenElement || document.body.classList.contains('fs-active')){
+        const fsTime = days > 0 ? `${pad(days)}d ${pad(hours)}:${pad(mins)}:${pad(secs)}` : `${pad(hours)}:${pad(mins)}:${pad(secs)}`;
+        countdownEl.innerHTML = `
+          <div style=\"text-align:center\">
+            <div class=\"fs-top\"><div class=\"info\" id=\"fsInfo\">${nextLabelEl.textContent}</div></div>
+            <div class=\"fs-big\">${fsTime}</div>
+          </div>`;
+      } else {
+        countdownEl.innerHTML = `
+          ${daysPart}
+          <div class=\"count-seg\"><div class=\"num\">${pad(hours)}</div><div class=\"label\">Stunden</div></div>
+          <div class=\"count-seg\"><div class=\"num\">${pad(mins)}</div><div class=\"label\">Minuten</div></div>
+          <div class=\"count-seg\"><div class=\"num\">${pad(secs)}</div><div class=\"label\">Sekunden</div></div>`;
+      }
+    }
+
+    let current = null;
+
+    function update(){
+      const now = new Date();
+      const nxt = findNextEvent(now);
+      if(!nxt){
+        nextLabelEl.textContent = 'Kein nächster Termin gefunden';
+        renderTimer(0);
+        return;
+      }
+      current = nxt;
+      if(nxt.special){
+        nextLabelEl.textContent = `${nxt.special} → ${nxt.label} (${nxt.date.toLocaleDateString('de-DE')})`;
+      } else {
+        nextLabelEl.textContent = `Zeit bis${nxt.label} — ${nxt.date.toLocaleString('de-DE', {day:'2-digit', month:'2-digit', year:'numeric'})}`;
+      }
+      renderTimer(nxt.date - now);
+    }
+
+    update();
+    setInterval(update, 900);
+
+    const fsBtn = document.getElementById('fsBtn');
+    let inFS = false;
+
+    async function enterFS(){
+      try{
+        if(timerWrap.requestFullscreen) await timerWrap.requestFullscreen();
+        else if(timerWrap.webkitRequestFullscreen) await timerWrap.webkitRequestFullscreen();
+        document.body.classList.add('fs-active');
+        fsBtn.textContent = 'Beenden';
+        inFS = true;
+        update();
+      }catch(e){console.warn('Fullscreen error',e)}
+    }
+    async function exitFS(){
+      try{
+        if(document.exitFullscreen) await document.exitFullscreen();
+        else if(document.webkitExitFullscreen) await document.webkitExitFullscreen();
+        document.body.classList.remove('fs-active');
+        fsBtn.textContent = 'Vollbild';
+        inFS = false;
+        update();
+      }catch(e){console.warn('Exit fullscreen error',e)}
+    }
+
+    fsBtn.addEventListener('click', ()=>{ if(!inFS) enterFS(); else exitFS(); });
+    document.addEventListener('fullscreenchange', ()=>{ if(!document.fullscreenElement){ document.body.classList.remove('fs-active'); inFS=false; fsBtn.textContent='Vollbild'; update(); } });
+
+    try{
+      const obs = new IntersectionObserver((entries, obs)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, {threshold:0.12});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    }catch(e){}
+
+    window.Schultimer = {findNextEvent, SCHEDULE, HOLIDAYS};
+  </script>
+</body>
+</html>
