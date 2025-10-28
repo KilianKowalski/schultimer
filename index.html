@@ -251,7 +251,7 @@
       if(nxt.special){
         nextLabelEl.textContent = `${nxt.special} → ${nxt.label} (${nxt.date.toLocaleDateString('de-DE')})`;
       } else {
-        nextLabelEl.textContent = `Zeit bis${nxt.label} — ${nxt.date.toLocaleString('de-DE', {day:'2-digit', month:'2-digit', year:'numeric'})}`;
+        nextLabelEl.textContent = `Zeit bis ${nxt.label} — ${nxt.date.toLocaleString('de-DE', {day:'2-digit', month:'2-digit', year:'numeric'})}`;
       }
       renderTimer(nxt.date - now);
     }
@@ -295,6 +295,7 @@
   </script>
 </body>
 </html>
+
 
 
 
