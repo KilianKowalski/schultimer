@@ -43,6 +43,10 @@
     .hero h2{font-size:34px;margin:0}
     .hero p{margin:0;opacity:0.9}
 
+    /* centered logo variant used in hero */
+    .hero-logo-wrap .mark{width:112px;height:112px;border-radius:20px}
+    .hero-logo-wrap .mark img{width:88px;height:88px;border-radius:12px}
+
     section.timer-area{padding:44px 20px}
     .timer-wrap{max-width:920px;margin:0 auto;background:var(--card);padding:26px;border-radius:18px;box-shadow:0 12px 40px rgba(2,6,23,0.6);display:grid;gap:12px;position:relative}
     .next-label{font-size:13px;opacity:0.94;text-transform:uppercase;letter-spacing:1px}
@@ -64,6 +68,10 @@
     .fs-top .info{font-size:18px;font-weight:700;opacity:0.95}
     .fs-big{font-size:96px;font-weight:900;letter-spacing:2px}
 
+    /* new text area under timer */
+    section.hero-text-area{padding:30px 20px}
+    .hero-text-area .card{max-width:980px;margin:0 auto}
+
     footer{padding:24px 0;margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
     footer .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
 
@@ -75,6 +83,8 @@
       .count-seg{min-width:86px;padding:12px}
       .hero h2{font-size:24px}
       .fs-big{font-size:46px}
+      .hero-logo-wrap .mark{width:86px;height:86px}
+      .hero-logo-wrap .mark img{width:64px;height:64px}
     }
   </style>
 </head>
@@ -105,9 +115,11 @@
       <div class="overlay" aria-hidden></div>
 
       <div class="container">
-        <div class="card reveal">
-          <h2>Er ist endlich wieder da!</h2>
-          <p>Wir haben es geschafft: Schultimer ist nach zwei Jahren wieder online! Seit die Website offline genommen wurde, hat sich viel getan. Ich hoffe, ihr könnt euch mit dem neuen Design abfinden.</p>
+        <!-- replaced the hero text with a centered logo (keeps the hero background in place) -->
+        <div class="card reveal hero-logo-wrap" aria-hidden>
+          <div class="mark">
+            <img src="header_logo.png" alt="Schultimer Logo">
+          </div>
         </div>
       </div>
     </section>
@@ -123,6 +135,17 @@
         </div>
       </div>
     </section>
+
+    <!-- NEW: area containing the former hero text, now placed under the timer -->
+    <section class="hero-text-area">
+      <div class="container">
+        <div class="card reveal">
+          <h2>Er ist endlich wieder da!</h2>
+          <p>Wir haben es geschafft: Schultimer ist nach zwei Jahren wieder online! Seit die Website offline genommen wurde, hat sich viel getan. Ich hoffe, ihr könnt euch mit dem neuen Design abfinden.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -295,8 +318,4 @@
   </script>
 </body>
 </html>
-
-
-
-
-
+1
