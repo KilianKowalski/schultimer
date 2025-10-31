@@ -28,24 +28,34 @@
     .container{max-width:var(--maxw);margin:0 auto;padding:24px}
     .nav{display:flex;align-items:center;gap:14px}
     .logo{display:flex;align-items:center;gap:12px}
-    .mark{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;box-shadow:0 12px 40px rgba(6,8,25,0.7);animation:float 5.6s ease-in-out infinite}
-    .mark img{width:44px;height:44px;object-fit:contain;border-radius:8px}
+    .mark{display:grid;place-items:center;animation:float 5.6s ease-in-out infinite}
+    .mark img{object-fit:contain;display:block}
     @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
     .logo h1{font-size:18px;margin:0}
     .logo p{margin:0;font-size:12px;opacity:0.85}
 
     .hero{min-height:68vh;display:grid;place-items:center;padding:48px 20px;position:relative;overflow:hidden}
-    /* hero background uses <picture> with WebP + JPG fallback */
     .hero picture, .hero picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
     .hero .overlay{position:absolute;inset:0;background:linear-gradient(rgba(7,10,32,0.55), rgba(6,8,25,0.55));pointer-events:none}
 
     .hero .card{width:100%;max-width:980px;padding:44px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 18px 60px rgba(2,6,23,0.6);backdrop-filter: blur(10px);border:1px solid rgba(255,255,255,0.03);display:grid;place-items:center;gap:12px;text-align:center;position:relative;z-index:2}
-    .hero h2{font-size:34px;margin:0}
-    .hero p{margin:0;opacity:0.9}
 
-    /* centered logo variant used in hero */
-    .hero-logo-wrap .mark{width:112px;height:112px;border-radius:20px}
-    .hero-logo-wrap .mark img{width:88px;height:88px;border-radius:12px}
+    /* hero logo with correct aspect ratio 500x250 and no transparent frame */
+    .hero-logo-wrap .mark{
+      width:500px;
+      height:250px;
+      border:none;
+      border-radius:0;
+      box-shadow:none;
+    }
+    .hero-logo-wrap .mark img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border:none;
+      border-radius:0;
+      background:none;
+    }
 
     section.timer-area{padding:44px 20px}
     .timer-wrap{max-width:920px;margin:0 auto;background:var(--card);padding:26px;border-radius:18px;box-shadow:0 12px 40px rgba(2,6,23,0.6);display:grid;gap:12px;position:relative}
@@ -59,16 +69,13 @@
     button.btn{padding:12px 18px;border-radius:999px;border:0;cursor:pointer;font-weight:700;background:var(--glass);backdrop-filter: blur(6px);color:inherit}
     button.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061126;box-shadow:0 10px 30px rgba(99,102,241,0.12)}
 
-    /* Fullscreen (timer-only) */
     body.fs-active header, body.fs-active .hero, body.fs-active footer{display:none}
     body.fs-active .next-label{display:none}
-
     body.fs-active .timer-wrap{position:fixed;inset:0;border-radius:0;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center}
     .fs-top{position:absolute;top:18px;left:50%;transform:translateX(-50%);text-align:center}
     .fs-top .info{font-size:18px;font-weight:700;opacity:0.95}
     .fs-big{font-size:96px;font-weight:900;letter-spacing:2px}
 
-    /* new text area under timer */
     section.hero-text-area{padding:30px 20px}
     .hero-text-area .card{max-width:980px;margin:0 auto}
 
@@ -80,11 +87,10 @@
     .reveal.visible{opacity:1;transform:none}
 
     @media (max-width:720px){
+      .hero-logo-wrap .mark{width:300px;height:150px}
       .count-seg{min-width:86px;padding:12px}
       .hero h2{font-size:24px}
       .fs-big{font-size:46px}
-      .hero-logo-wrap .mark{width:86px;height:86px}
-      .hero-logo-wrap .mark img{width:64px;height:64px}
     }
   </style>
 </head>
@@ -93,7 +99,6 @@
     <div class="container nav">
       <div class="logo">
         <div class="mark" aria-hidden>
-          <!-- header logo: place your file as "header_logo.png" next to index.html -->
           <img src="header_logo.png" alt="Schultimer 2 Logo" width="44" height="44">
         </div>
         <div>
@@ -107,15 +112,12 @@
 
   <main>
     <section class="hero">
-      <!-- use <picture> so WebP wird geladen, JPG ist Fallback -->
       <picture aria-hidden>
         <source srcset="background.webp" type="image/webp">
-        <img src="background.jpg" alt="" />
+        <img src="background.jpg" alt="">
       </picture>
       <div class="overlay" aria-hidden></div>
-
       <div class="container">
-        <!-- replaced the hero text with a centered logo (keeps the hero background in place) -->
         <div class="card reveal hero-logo-wrap" aria-hidden>
           <div class="mark">
             <img src="logo_white.png" alt="Schultimer Logo Weiß">
@@ -127,16 +129,13 @@
     <section class="timer-area">
       <div class="timer-wrap reveal" id="timerWrap">
         <div class="next-label" id="nextLabel">Zeit bis ...</div>
-        <div class="countdown" id="countdown">
-          <!-- JS füllt hier die Segmente -->
-        </div>
+        <div class="countdown" id="countdown"></div>
         <div class="controls">
           <button class="btn primary" id="fsBtn">Vollbild</button>
         </div>
       </div>
     </section>
 
-    <!-- NEW: area containing the former hero text, now placed under the timer -->
     <section class="hero-text-area">
       <div class="container">
         <div class="card reveal">
@@ -145,7 +144,6 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <footer>
@@ -319,5 +317,6 @@
 </body>
 </html>
 1
+
 
 
