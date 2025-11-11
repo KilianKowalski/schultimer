@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Games Bereich — Schultimer</title>
+<link rel="icon" href="favicon.ico">
+
+<style>
+/* --- STYLE AUS HAUPTSEITE ÜBERNOMMEN --- */
+:root{
+  --bg:#071026;
+  --card:rgba(255,255,255,0.04);
+  --glass:rgba(255,255,255,0.03);
+  --accent1:#6ee7b7;
+  --accent2:#60a5fa;
+  --accent3:#c084fc;
+  --rounded:16px;
+  --maxw:1100px;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:linear-gradient(180deg,var(--bg),#071022);color:#e6eef8;min-height:100%}
+a{color:inherit;text-decoration:none}
+
+header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+.container{max-width:var(--maxw);margin:0 auto;padding:24px}
+.nav{display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:44px;height:44px}
+.logo h1{font-size:18px;margin:0}
+.logo p{margin:0;font-size:12px;opacity:0.85}
+
+footer{padding:24px 0;margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
+footer .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
+.muted{opacity:0.8;font-size:13px}
+
+#lockScreen, #gamesContent {
+  max-width:600px;
+  margin:80px auto;
+  padding:30px;
+  background:var(--card);
+  border-radius:var(--rounded);
+  text-align:center;
+}
+
+#gamesContent { display:none; }
+
+input {
+  width:80%;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  margin:10px 0;
+  text-align:center;
+  font-size:16px;
+}
+
+button {
+  padding:12px 22px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  font-weight:700;
+  cursor:pointer;
+  color:#061126;
+}
+
+.game-list a {
+  display:block;
+  padding:14px;
+  background:var(--glass);
+  margin:10px 0;
+  border-radius:10px;
+  font-weight:600;
+}
+.game-list a:hover { background:rgba(255,255,255,0.08) }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <img src="header_logo.png" alt="Logo">
+      <div>
+        <h1>Schultimer 2</h1>
+        <p>Von Schüler - Für Schüler</p>
+      </div>
+    </div>
+    <div style="margin-left:auto" class="muted">Hinweis: Kein offizieller Schulbezug</div>
+  </div>
+</header>
+
+<main>
+
+  <div id="lockScreen">
+    <h2>Games Bereich 🔒</h2>
+    <p>Passwort eingeben um fortzufahren</p>
+    <input type="password" id="pwInput" placeholder="Passwort eingeben...">
+    <br>
+    <button onclick="checkPW()">Login</button>
+    <p id="error" style="color:#ff6b6b;display:none;margin-top:10px">Falsches Passwort!</p>
+  </div>
+
+  <div id="gamesContent">
+    <h2>🎮 Spiele</h2>
+    <p>Klicke auf ein Spiel um es zu öffnen</p>
+
+    <div class="game-list">
+      <!-- HIER EINFACH LINKS HINZUFÜGEN / ENTFERNEN -->
+      <a href="https://krunker.io" target="_blank">Krunker</a>
+      <a href="https://sites.google.com/classroom.center/view/" target="_blank">Classroom Center</a>
+      <a href="https://sites.google.com/site/thegamecompilation/classroom-6x" target="_blank">Unblocked Games World</a>
+    </div>
+
+    <p class="muted">Neue Games kannst du einfach im Code hinzufügen ✅</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <div class="muted">Schultimer 2 — © 2025 Kilian Reg</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="index.html">Start</a>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const PASSWORD = "GAMES";  // <-- HIER PASSWORT ÄNDERN
+
+function checkPW(){
+  const input = document.getElementById("pwInput").value;
+  if(input === PASSWORD){
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("gamesContent").style.display = "block";
+  } else {
+    document.getElementById("error").style.display = "block";
+  }
+}
+</script>
+
+</body>
+</html>
