@@ -7,7 +7,6 @@
 <link rel="icon" href="favicon.ico">
 
 <style>
-/* --- STYLE AUS HAUPTSEITE ÜBERNOMMEN --- */
 :root{
   --bg:#071026;
   --card:rgba(255,255,255,0.04);
@@ -17,18 +16,25 @@
   --accent3:#c084fc;
   --rounded:16px;
   --maxw:1100px;
+  --hover-duration:320ms;
+  --hover-ease:cubic-bezier(.2,.9,.2,1);
   font-family:Inter, ui-sans-serif, system-ui, -apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:linear-gradient(180deg,var(--bg),#071022);color:#e6eef8;min-height:100%}
-a{color:inherit;text-decoration:none}
+a{color:inherit;text-decoration:none;position:relative;display:inline-block}
+a::after{content:"";position:absolute;left:0;bottom:-4px;height:3px;width:0;border-radius:4px;background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));transition:width var(--hover-duration) var(--hover-ease);opacity:0.95}
+a:hover::after{width:100%}
 
 header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
 .container{max-width:var(--maxw);margin:0 auto;padding:24px}
 .nav{display:flex;align-items:center;gap:14px}
-.logo{display:flex;align-items:center;gap:12px}
-.logo img{width:44px;height:44px}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform var(--hover-duration) var(--hover-ease)}
+.logo img{width:44px;height:44px;transition:transform var(--hover-duration) var(--hover-ease),filter var(--hover-duration) var(--hover-ease)}
+.logo:hover{transform:translateY(-4px)}
+.logo:hover img{transform:scale(1.05);filter:drop-shadow(0 10px 20px rgba(0,0,0,0.4))}
+
 .logo h1{font-size:18px;margin:0}
 .logo p{margin:0;font-size:12px;opacity:0.85}
 
@@ -43,7 +49,9 @@ footer .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-cont
   background:var(--card);
   border-radius:var(--rounded);
   text-align:center;
+  transition:transform var(--hover-duration) var(--hover-ease), box-shadow var(--hover-duration) var(--hover-ease);
 }
+#lockScreen:hover, #gamesContent:hover {transform:translateY(-6px);box-shadow:0 30px 90px rgba(2,6,23,0.6)}
 
 #gamesContent { display:none; }
 
@@ -55,7 +63,9 @@ input {
   margin:10px 0;
   text-align:center;
   font-size:16px;
+  transition:transform var(--hover-duration) var(--hover-ease), box-shadow var(--hover-duration) var(--hover-ease);
 }
+input:focus {transform:scale(1.02);box-shadow:0 8px 30px rgba(96,165,250,0.18);outline:none}
 
 button {
   padding:12px 22px;
@@ -65,7 +75,25 @@ button {
   font-weight:700;
   cursor:pointer;
   color:#061126;
+  position:relative;
+  overflow:hidden;
+  transition:transform 260ms var(--hover-ease),box-shadow 260ms var(--hover-ease);
 }
+button::after{
+  content:"";
+  position:absolute;
+  left:-40%;
+  top:0;
+  width:180%;
+  height:100%;
+  background:linear-gradient(90deg, rgba(110,231,183,0.12), rgba(96,165,250,0.12), rgba(192,132,252,0.12));
+  transform:translateX(0);
+  transition:transform 580ms var(--hover-ease),opacity 320ms var(--hover-ease);
+  opacity:0;
+  pointer-events:none;
+}
+button:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 20px 60px rgba(2,6,23,0.55)}
+button:hover::after{transform:translateX(20%);opacity:1}
 
 .game-list a {
   display:block;
@@ -74,8 +102,27 @@ button {
   margin:10px 0;
   border-radius:10px;
   font-weight:600;
+  position:relative;
+  transition:transform var(--hover-duration) var(--hover-ease), box-shadow var(--hover-duration) var(--hover-ease), background var(--hover-duration) var(--hover-ease);
 }
-.game-list a:hover { background:rgba(255,255,255,0.08) }
+.game-list a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2),var(--accent3));
+  opacity:0;
+  transform:scale(0.95);
+  transition:all var(--hover-duration) var(--hover-ease);
+  pointer-events:none;
+}
+.game-list a:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 14px 50px rgba(2,6,23,0.5);
+  background:rgba(255,255,255,0.06);
+}
+.game-list a:hover::before{opacity:0.15;transform:scale(1)}
+
 </style>
 </head>
 
@@ -112,7 +159,6 @@ button {
     <p>Klicke auf ein Spiel um es zu öffnen</p>
 
     <div class="game-list">
-      <!-- HIER EINFACH LINKS HINZUFÜGEN / ENTFERNEN -->
       <a href="https://eaglercraft-kilian.netlify.app/" target="_blank">Minecraft (kein Multiplayer möglich)</a>   
       <a href="https://sites.google.com/view/drive-u-7-home-10/home/" target="_blank">G+</a>
       <a href="https://sites.google.com/classroom.center/view/" target="_blank">Classroom Center</a>
