@@ -6,6 +6,7 @@
 <title>Games Bereich — Schultimer</title>
 <link rel="icon" href="favicon.ico">
 <style>
+/* --- STYLE AUS HAUPTSEITE ÜBERNOMMEN --- */
 :root{
   --bg:#071026;
   --card:rgba(255,255,255,0.04);
@@ -31,12 +32,105 @@ header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(2
 footer{padding:24px 0;margin-top:40px;border-top:1px solid rgba(255,255,255,0.03)}
 footer .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 24px}
 .muted{opacity:0.8;font-size:13px}
-#lockScreen, #gamesContent { max-width:600px; margin:80px auto; padding:30px; background:var(--card); border-radius:var(--rounded); text-align:center; }
-#gamesContent { display:none; }
-input { width:80%; padding:12px; border-radius:8px; border:none; margin:10px 0; text-align:center; font-size:16px; }
+
+/* Panels */
+#lockScreenWrap { max-width:600px; margin:80px auto; position:relative; height:auto; }
+#lockScreen, #gamesContent {
+  padding:30px;
+  background:var(--card);
+  border-radius:var(--rounded);
+  text-align:center;
+  box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+}
+/* lockScreen specifics */
+#gamesContent { display:block; opacity:0; transform:translateY(6px); pointer-events:none; transition:opacity .45s ease, transform .45s ease; }
+
+/* Input / Buttons */
+input { width:80%; padding:12px; border-radius:8px; border:none; margin:10px 0; text-align:center; font-size:16px; background:rgba(255,255,255,0.02); color:inherit; outline:none; }
 button { padding:12px 22px; border:none; border-radius:999px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); font-weight:700; cursor:pointer; color:#061126; }
+
+/* games list */
 .game-list a { display:block; padding:14px; background:var(--glass); margin:10px 0; border-radius:10px; font-weight:600; }
 .game-list a:hover { background:rgba(255,255,255,0.08) }
+
+/* Reveal overlay (Swoosh) */
+.reveal-overlay {
+  pointer-events:none;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  border-radius:var(--rounded);
+  overflow:hidden;
+  z-index:40;
+}
+
+/* The swoosh element itself (big skewed gradient) */
+.reveal-overlay .swoosh {
+  position:absolute;
+  left:-40%;
+  top:-20%;
+  width:60%;
+  height:140%;
+  transform:translateX(-100%) skewX(-18deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  filter: blur(8px);
+  opacity:0;
+}
+
+/* animate class triggers it */
+.reveal-overlay.animate .swoosh {
+  animation: swooshMove 700ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* optional second subtle shimmer */
+.reveal-overlay.animate .swoosh::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  transform:translateX(0);
+  opacity:.9;
+}
+
+/* keyframes */
+@keyframes swooshMove {
+  0% {
+    transform:translateX(-120%) skewX(-18deg) scaleX(.8);
+    opacity:0.0;
+  }
+  10% {
+    opacity:0.9;
+  }
+  70% {
+    transform:translateX(30%) skewX(-12deg) scaleX(1.02);
+    opacity:1;
+  }
+  100% {
+    transform:translateX(160%) skewX(-8deg) scaleX(1.0);
+    opacity:0;
+  }
+}
+
+/* When revealed, show gamesContent */
+#gamesContent.visible {
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+/* gently fade out lock screen during reveal */
+#lockScreen.fade-out {
+  transition: opacity .45s ease, transform .55s ease;
+  opacity:0;
+  transform:translateY(-10px) scale(.995);
+}
+
+/* small responsive tweak */
+@media (max-width:560px){
+  input { width:90%; }
+}
 </style>
 </head>
 <body>
@@ -56,31 +150,39 @@ button { padding:12px 22px; border:none; border-radius:999px; background:linear-
 </header>
 
 <main>
-<div id="lockScreen">
-  <h2>Games Bereich 🔒</h2>
-  <p>Passwort eingeben um fortzufahren</p>
+  <div id="lockScreenWrap">
+    <div id="lockScreen">
+      <h2>Games Bereich 🔒</h2>
+      <p>Passwort eingeben um fortzufahren</p>
 
-  <form id="loginForm" autocomplete="on">
-    <input type="password" id="pwInput" name="password" placeholder="Passwort eingeben..." required>
-    <br>
-    <button type="submit">Login</button>
-  </form>
+      <form id="loginForm" autocomplete="on">
+        <input type="password" id="pwInput" name="password" placeholder="Passwort eingeben..." required>
+        <br>
+        <button type="submit">Login</button>
+      </form>
 
-  <p id="error" style="color:#ff6b6b;display:none;margin-top:10px">Falsches Passwort!</p>
-</div>
+      <p id="error" style="color:#ff6b6b;display:none;margin-top:10px">Falsches Passwort!</p>
+    </div>
 
-<div id="gamesContent">
-  <h2>🎮 Spiele</h2>
-  <p>Klicke auf ein Spiel um es zu öffnen</p>
-  <div class="game-list">
-    <a href="https://eaglercraft-kilian.netlify.app/" target="_blank">Minecraft (kein Multiplayer möglich)</a>
-    <a href="https://sites.google.com/view/drive-u-7-home-10/home/" target="_blank">G+</a>
-    <a href="https://sites.google.com/classroom.center/view/" target="_blank">Classroom Center</a>
-    <a href="https://sites.google.com/site/thegamecompilation/classroom-6x" target="_blank">Unblocked Games World</a>
-    <a href="https://sites.google.com/site/unblockedgames77/" target="_blank">Premium 77</a>
+    <!-- Reveal overlay (wird beim Einloggen animiert) -->
+    <div class="reveal-overlay" id="revealOverlay" aria-hidden="true" style="display:none;">
+      <div class="swoosh"></div>
+    </div>
   </div>
-  <p class="muted">Sag mir bescheid, sollte eine Seite nicht mehr gehen ✅</p>
-</div>
+
+  <div id="gamesContent" aria-hidden="true">
+    <h2>🎮 Spiele</h2>
+    <p>Klicke auf ein Spiel um es zu öffnen</p>
+    <div class="game-list">
+      <!-- HIER EINFACH LINKS HINZUFÜGEN / ENTFERNEN -->
+      <a href="https://eaglercraft-kilian.netlify.app/" target="_blank">Minecraft (kein Multiplayer möglich)</a>
+      <a href="https://sites.google.com/view/drive-u-7-home-10/home/" target="_blank">G+</a>
+      <a href="https://sites.google.com/classroom.center/view/" target="_blank">Classroom Center</a>
+      <a href="https://sites.google.com/site/thegamecompilation/classroom-6x" target="_blank">Unblocked Games World</a>
+      <a href="https://sites.google.com/site/unblockedgames77/" target="_blank">Premium 77</a>
+    </div>
+    <p class="muted">Sag mir bescheid, sollte eine Seite nicht mehr gehen ✅</p>
+  </div>
 </main>
 
 <footer>
@@ -95,37 +197,103 @@ button { padding:12px 22px; border:none; border-radius:999px; background:linear-
 </footer>
 
 <script>
-const PASSWORD = "GAMES";
+const PASSWORD = "GAMES"; // <-- HIER PASSWORT ÄNDERN
 
-// Prüft Passwort und zeigt Inhalte
+const loginForm = document.getElementById("loginForm");
+const pwInput = document.getElementById("pwInput");
+const errorEl = document.getElementById("error");
+const lockScreen = document.getElementById("lockScreen");
+const gamesContent = document.getElementById("gamesContent");
+const revealOverlay = document.getElementById("revealOverlay");
+
+function revealAndShow() {
+  // Prevent multiple triggers
+  if (revealOverlay.dataset.playing === "1") return;
+  revealOverlay.dataset.playing = "1";
+
+  // Make overlay visible and start animation
+  revealOverlay.style.display = "block";
+
+  // tiny delay so CSS transitions/animations can initialize reliably
+  requestAnimationFrame(() => {
+    // add animate class -> starts CSS keyframes
+    revealOverlay.classList.add("animate");
+  });
+
+  // Start fading out lock screen for smoother look
+  lockScreen.classList.add("fade-out");
+
+  // Prepare games content to show (but keep it invisible briefly)
+  gamesContent.classList.remove("visible");
+  gamesContent.setAttribute("aria-hidden", "false");
+
+  // When the animation ends, finalize: hide lockScreen and remove overlay
+  const onAnimEnd = (ev) => {
+    // only react to swoosh animation end
+    revealOverlay.removeEventListener("animationend", onAnimEnd);
+    // hide lock screen completely
+    lockScreen.style.display = "none";
+    // hide overlay
+    revealOverlay.style.display = "none";
+    revealOverlay.classList.remove("animate");
+    revealOverlay.dataset.playing = "0";
+    // Show games content fully
+    gamesContent.classList.add("visible");
+    gamesContent.style.transitionDelay = "0s";
+  };
+
+  // listen for the animationend event on the swoosh element
+  const swooshEl = revealOverlay.querySelector(".swoosh");
+  if (swooshEl) {
+    swooshEl.addEventListener("animationend", onAnimEnd);
+  } else {
+    // fallback: after 800ms finalize
+    setTimeout(onAnimEnd, 800);
+  }
+}
+
+// Prüft Passwort und ruft reveal auf wenn korrekt
 function checkPW(value){
   if(value === PASSWORD){
-    document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("gamesContent").style.display = "block";
+    errorEl.style.display = "none";
+    revealAndShow();
     return true;
   } else {
-    document.getElementById("error").style.display = "block";
+    errorEl.style.display = "block";
     return false;
   }
 }
 
-// EventListener für Enter-Taste / Formular
-document.getElementById("loginForm").addEventListener("submit", function(event){
+// Form submission (Enter / Button)
+loginForm.addEventListener("submit", function(event){
   event.preventDefault();
-  const input = document.getElementById("pwInput").value;
-  checkPW(input);
+  const val = pwInput.value;
+  checkPW(val);
 });
 
 // Automatisches Einloggen, falls Browser Passwort automatisch einfüllt
+// Note: some browsers populate value after a short delay, deshalb prüfen wir mehrfach kurz nach dem Load
 window.addEventListener('load', function(){
-  const pwField = document.getElementById("pwInput");
-  if(pwField.value){
-    checkPW(pwField.value);
+  pwInput.focus();
+
+  // check immediately and also after small delays to catch autofill timing
+  const tryAuto = () => {
+    const v = pwInput.value;
+    if(v && v.length > 0) {
+      checkPW(v);
+      return true;
+    }
+    return false;
+  };
+
+  if(!tryAuto()){
+    // retries a few times (catches typical browser autofill delays), stops early if found
+    const attempts = [120, 400, 800]; // ms
+    attempts.forEach((t, i) => {
+      setTimeout(() => { tryAuto(); }, t);
+    });
   }
 });
-
-// Fokus direkt auf Passwortfeld setzen
-document.getElementById("pwInput").focus();
 </script>
 
 </body>
