@@ -6,7 +6,6 @@
 <title>Games Bereich — Schultimer</title>
 <link rel="icon" href="favicon.ico">
 <style>
-/* --- STYLE AUS HAUPTSEITE ÜBERNOMMEN --- */
 :root{
   --bg:#071026;
   --card:rgba(255,255,255,0.04);
@@ -61,7 +60,6 @@ button { padding:12px 22px; border:none; border-radius:999px; background:linear-
   <h2>Games Bereich 🔒</h2>
   <p>Passwort eingeben um fortzufahren</p>
 
-  <!-- Form für Passwort -->
   <form id="loginForm" autocomplete="on">
     <input type="password" id="pwInput" name="password" placeholder="Passwort eingeben..." required>
     <br>
@@ -75,7 +73,6 @@ button { padding:12px 22px; border:none; border-radius:999px; background:linear-
   <h2>🎮 Spiele</h2>
   <p>Klicke auf ein Spiel um es zu öffnen</p>
   <div class="game-list">
-    <!-- HIER EINFACH LINKS HINZUFÜGEN / ENTFERNEN -->
     <a href="https://eaglercraft-kilian.netlify.app/" target="_blank">Minecraft (kein Multiplayer möglich)</a>
     <a href="https://sites.google.com/view/drive-u-7-home-10/home/" target="_blank">G+</a>
     <a href="https://sites.google.com/classroom.center/view/" target="_blank">Classroom Center</a>
@@ -98,19 +95,37 @@ button { padding:12px 22px; border:none; border-radius:999px; background:linear-
 </footer>
 
 <script>
-const PASSWORD = "GAMES"; // <-- HIER PASSWORT ÄNDERN
+const PASSWORD = "GAMES";
 
-// EventListener für Enter-Taste / Formular-Submit
-document.getElementById("loginForm").addEventListener("submit", function(event){
-  event.preventDefault(); // Verhindert Neuladen
-  const input = document.getElementById("pwInput").value;
-  if(input === PASSWORD){
+// Prüft Passwort und zeigt Inhalte
+function checkPW(value){
+  if(value === PASSWORD){
     document.getElementById("lockScreen").style.display = "none";
     document.getElementById("gamesContent").style.display = "block";
+    return true;
   } else {
     document.getElementById("error").style.display = "block";
+    return false;
+  }
+}
+
+// EventListener für Enter-Taste / Formular
+document.getElementById("loginForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  const input = document.getElementById("pwInput").value;
+  checkPW(input);
+});
+
+// Automatisches Einloggen, falls Browser Passwort automatisch einfüllt
+window.addEventListener('load', function(){
+  const pwField = document.getElementById("pwInput");
+  if(pwField.value){
+    checkPW(pwField.value);
   }
 });
+
+// Fokus direkt auf Passwortfeld setzen
+document.getElementById("pwInput").focus();
 </script>
 
 </body>
