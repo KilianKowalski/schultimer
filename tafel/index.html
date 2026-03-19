@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9AM Hausaufgaben</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #login, #content {
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      width: 80%;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #00c3ff;
+      color: white;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0099cc;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .title {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    #refreshBtn {
+      margin-top: 20px;
+      background: #00ff99;
+    }
+
+    #refreshBtn:hover {
+      background: #00cc77;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div id="login">
+    <div class="title">📚 9AM Hausaufgaben</div>
+    <div class="subtitle">Passwort eingeben</div>
+    <input type="password" id="password" placeholder="Passwort">
+    <br>
+    <button onclick="checkPassword()">Login</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content" style="display:none;">
+    <div class="title">📸 Heutige Hausaufgaben</div>
+    <div class="subtitle">Stand der Tafel</div>
+    <img id="hausbild" src="hausaufgaben.jpg" alt="Hausaufgaben Tafel">
+    <br>
+    <button id="refreshBtn" onclick="refreshImage()">Seite aktualisieren</button>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const pw = document.getElementById("password").value;
+      if (pw === "9AM") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        alert("Falsches Passwort!");
+      }
+    }
+
+    function refreshImage() {
+      const img = document.getElementById("hausbild");
+      // ?timestamp=Date.now() sorgt dafür, dass der Browser das Bild neu lädt
+      img.src = "hausaufgaben.jpg?timestamp=" + new Date().getTime();
+    }
+  </script>
+
+</body>
+</html>
