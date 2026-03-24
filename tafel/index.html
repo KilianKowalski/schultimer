@@ -14,27 +14,31 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh; /* FIX für Handy */
     }
 
     #login, #content {
       text-align: center;
-      width: 100%;
-      max-width: 500px;
+      width: 90%;
+      max-width: 400px;
       padding: 20px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
     input {
       padding: 12px;
       border-radius: 10px;
       border: none;
-      width: 80%;
+      width: 100%;
       font-size: 16px;
       margin-top: 10px;
+      box-sizing: border-box;
     }
 
     button {
-      padding: 12px 20px;
+      padding: 12px;
       border: none;
       border-radius: 10px;
       background: #00c3ff;
@@ -42,27 +46,42 @@
       font-size: 16px;
       margin-top: 15px;
       cursor: pointer;
+      width: 100%;
     }
 
     button:hover {
       background: #0099cc;
     }
 
-    img {
-      width: 100%;
-      border-radius: 15px;
-      margin-top: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
     .title {
-      font-size: 24px;
+      font-size: 22px;
       margin-bottom: 10px;
+      font-weight: bold;
     }
 
     .subtitle {
       font-size: 14px;
       color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    /* 🔥 FESTER BILDKASTEN */
+    .image-box {
+      width: 100%;
+      height: 250px; /* immer gleiche Größe */
+      background: #111;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Bild passt sich an */
     }
 
     #refreshBtn {
@@ -83,23 +102,26 @@
     <div class="title">📚 9AM Hausaufgaben</div>
     <div class="subtitle">Passwort eingeben</div>
     <input type="password" id="password" placeholder="Passwort">
-    <br>
     <button onclick="checkPassword()">Login</button>
   </div>
 
   <!-- CONTENT -->
   <div id="content" style="display:none;">
     <div class="title">📸 Heutige Hausaufgaben</div>
-    <div class="subtitle">Stand der Tafel</div>
-    <img id="hausbild" src="hausaufgaben.jpg" alt="Hausaufgaben Tafel">
-    <br>
-    <button id="refreshBtn" onclick="refreshImage()">Seite aktualisieren</button>
+    <div class="subtitle">Stand: 24.03.26</div>
+
+    <!-- 🔥 Bildbox -->
+    <div class="image-box">
+      <img id="hausbild" src="hausaufgaben.jpg" alt="Hausaufgaben Tafel">
+    </div>
+
+    <button id="refreshBtn" onclick="refreshImage()">🔄 Aktualisieren</button>
   </div>
 
   <script>
     function checkPassword() {
       const pw = document.getElementById("password").value;
-      if (pw === "9AM") {
+      if (pw === "9M") {
         document.getElementById("login").style.display = "none";
         document.getElementById("content").style.display = "block";
       } else {
@@ -109,7 +131,6 @@
 
     function refreshImage() {
       const img = document.getElementById("hausbild");
-      // ?timestamp=Date.now() sorgt dafür, dass der Browser das Bild neu lädt
       img.src = "hausaufgaben.jpg?timestamp=" + new Date().getTime();
     }
   </script>
