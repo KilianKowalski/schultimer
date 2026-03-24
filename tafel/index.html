@@ -74,7 +74,6 @@
       object-fit: contain;
     }
 
-    /* 🔥 Vollbild Overlay */
     #fullscreen {
       position: fixed;
       top: 0;
@@ -94,7 +93,6 @@
       object-fit: contain;
     }
 
-    /* ❌ Close Button */
     #closeBtn {
       position: absolute;
       top: 20px;
@@ -122,6 +120,20 @@
     #refreshBtn:hover {
       background: #00cc77;
     }
+
+    #toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 255, 150, 0.9);
+      color: black;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: none;
+      z-index: 1000;
+    }
   </style>
 </head>
 
@@ -138,14 +150,14 @@
     <button id="refreshBtn" onclick="refreshImage()">🔄 Aktualisieren</button>
   </div>
 
-  <!-- 🔥 Vollbild -->
   <div id="fullscreen">
     <div id="closeBtn" onclick="closeFullscreen()">✖</div>
     <img id="fullimg">
   </div>
 
-  <script>
+  <div id="toast">✅ Aktualisiert!</div>
 
+  <script>
     const imageFile = "hausaufgaben.jpeg";
 
     const img = document.getElementById("hausbild");
@@ -159,6 +171,13 @@
 
     function refreshImage() {
       loadImage();
+
+      const toast = document.getElementById("toast");
+      toast.style.display = "block";
+
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 1500);
     }
 
     function openFullscreen() {
@@ -169,7 +188,6 @@
       document.getElementById("fullscreen").style.display = "none";
     }
 
-    // beim Start laden
     loadImage();
   </script>
 
