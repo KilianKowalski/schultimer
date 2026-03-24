@@ -14,10 +14,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* FIX für Handy */
+      min-height: 100vh;
     }
 
-    #login, #content {
+    #content {
       text-align: center;
       width: 90%;
       max-width: 400px;
@@ -25,16 +25,6 @@
       background: rgba(0,0,0,0.3);
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    input {
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      width: 100%;
-      font-size: 16px;
-      margin-top: 10px;
-      box-sizing: border-box;
     }
 
     button {
@@ -65,11 +55,10 @@
       margin-bottom: 10px;
     }
 
-    /* 🔥 FESTER BILDKASTEN */
     .image-box {
       width: 100%;
-      height: 250px; /* immer gleiche Größe */
-      background: #111;
+      height: 350px;
+      background: linear-gradient(135deg, #000, #222);
       border-radius: 15px;
       overflow: hidden;
       margin-top: 15px;
@@ -81,7 +70,7 @@
     .image-box img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Bild passt sich an */
+      object-fit: contain;
     }
 
     #refreshBtn {
@@ -97,20 +86,10 @@
 
 <body>
 
-  <!-- LOGIN -->
-  <div id="login">
-    <div class="title">📚 9AM Hausaufgaben</div>
-    <div class="subtitle">Passwort eingeben</div>
-    <input type="password" id="password" placeholder="Passwort">
-    <button onclick="checkPassword()">Login</button>
-  </div>
-
-  <!-- CONTENT -->
-  <div id="content" style="display:none;">
+  <div id="content">
     <div class="title">📸 Heutige Hausaufgaben</div>
-    <div class="subtitle">Stand: 24.03.26</div>
+    <div class="subtitle">Stand der Tafel</div>
 
-    <!-- 🔥 Bildbox -->
     <div class="image-box">
       <img id="hausbild" src="hausaufgaben.jpeg" alt="Hausaufgaben Tafel">
     </div>
@@ -119,19 +98,9 @@
   </div>
 
   <script>
-    function checkPassword() {
-      const pw = document.getElementById("password").value;
-      if (pw === "9M") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      } else {
-        alert("Falsches Passwort!");
-      }
-    }
-
     function refreshImage() {
       const img = document.getElementById("hausbild");
-      img.src = "hausaufgaben.jpg?timestamp=" + new Date().getTime();
+      img.src = "hausaufgaben.jpeg?timestamp=" + new Date().getTime();
     }
   </script>
 
