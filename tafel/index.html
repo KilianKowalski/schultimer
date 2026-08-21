@@ -3,200 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9AM Hausaufgaben</title>
+
+  <title>Klasse M10 – Sharezone</title>
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #2c2c54);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
-    }
-
-    #content {
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 20px;
-      background: rgba(0,0,0,0.3);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+      background: #0d1117;
+      color: #f0f6fc;
     }
 
-    button {
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #00c3ff;
-      color: white;
-      font-size: 16px;
-      margin-top: 15px;
-      cursor: pointer;
+    .container {
       width: 100%;
+      max-width: 650px;
+      padding: 45px 30px;
+      text-align: center;
+
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 24px;
+
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     }
 
-    button:hover {
-      background: #0099cc;
-    }
-
-    .title {
-      font-size: 22px;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .info {
-      font-size: 12px;
-      color: #aaa;
-      margin-bottom: 5px;
-    }
-
-    .subtitle {
-      font-size: 14px;
-      color: #ccc;
+    .class {
+      color: #8b949e;
+      font-size: 18px;
+      font-weight: 600;
       margin-bottom: 10px;
     }
 
-    .image-box {
+    h1 {
+      font-size: 36px;
+      margin-bottom: 22px;
+      color: #ffffff;
+    }
+
+    .intro {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #c9d1d9;
+      margin-bottom: 30px;
+    }
+
+    .intro strong {
+      color: #ffffff;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .feature {
+      padding: 16px;
+      border-radius: 14px;
+
+      background: #21262d;
+      border: 1px solid #30363d;
+
+      color: #e6edf3;
+      font-size: 16px;
+    }
+
+    .join-button {
+      display: inline-block;
       width: 100%;
-      height: 350px;
-      background: linear-gradient(135deg, #000, #222);
-      border-radius: 15px;
-      overflow: hidden;
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
+      max-width: 420px;
+
+      padding: 17px 25px;
+      border-radius: 14px;
+
+      background: #238636;
+      color: white;
+
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+
+      transition: 0.2s ease;
     }
 
-    .image-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    .join-button:hover {
+      background: #2ea043;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(35, 134, 54, 0.25);
     }
 
-    #fullscreen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
+    .important {
+      margin-top: 22px;
+
+      color: #8b949e;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
-    #fullscreen img {
-      max-width: 95%;
-      max-height: 95%;
-      object-fit: contain;
+    .important strong {
+      color: #c9d1d9;
     }
 
-    #closeBtn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      cursor: pointer;
-    }
+    @media (max-width: 500px) {
+      .container {
+        padding: 35px 20px;
+      }
 
-    #closeBtn:hover {
-      background: rgba(255,255,255,0.4);
-    }
+      h1 {
+        font-size: 29px;
+      }
 
-    #refreshBtn {
-      margin-top: 20px;
-      background: #00ff99;
-    }
-
-    #refreshBtn:hover {
-      background: #00cc77;
-    }
-
-    #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 255, 150, 0.9);
-      color: black;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 14px;
-      display: none;
-      z-index: 1000;
+      .features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div id="content">
-    <div class="title">📸 Heutige Hausaufgabentafel</div>
-    <div class="info">Wird täglich ca. 15 Uhr aktualisiert</div>
-    <div class="subtitle">Stand: 28.04.26</div>
+  <main class="container">
 
-    <div class="image-box" onclick="openFullscreen()">
-      <img id="hausbild" alt="Hausaufgaben Tafel">
+    <div class="class">Klasse M10</div>
+
+    <h1>Unsere Klassenorganisation</h1>
+
+    <p class="intro">
+      Diese Website wird für Hausaufgaben und den Stundenplan
+      <strong>nicht mehr genutzt.</strong>
+      <br><br>
+      Ab dem neuen Schuljahr verwenden wir dafür
+      <strong>Sharezone.</strong>
+    </p>
+
+    <div class="features">
+      <div class="feature">📝 Hausaufgaben</div>
+      <div class="feature">📅 Stundenplan</div>
+      <div class="feature">🔄 Vertretungsplan</div>
+      <div class="feature">📚 Weitere Infos</div>
     </div>
 
-    <button id="refreshBtn" onclick="refreshImage()">🔄 Aktualisieren</button>
-  </div>
+    <a
+      href="https://web.sharezone.net/link?type=joinbykey&data=OuhphH"
+      class="join-button"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      🚀 Sharezone beitreten
+    </a>
 
-  <div id="fullscreen">
-    <div id="closeBtn" onclick="closeFullscreen()">X</div>
-    <img id="fullimg">
-  </div>
+    <p class="important">
+      <strong>Wichtig:</strong><br>
+      Bitte verwendet beim Beitritt euren
+      <strong>richtigen Vor- und Nachnamen</strong>,
+      damit wir wissen, wer zur Klasse gehört und ich euch richtig in die Fächer eintragen kann.
+    </p>
 
-  <div id="toast">✅ Aktualisiert!</div>
-
-  <script>
-    const imageFile = "hausaufgaben.jpeg";
-
-    const img = document.getElementById("hausbild");
-    const fullimg = document.getElementById("fullimg");
-
-    function loadImage() {
-      const src = imageFile + "?t=" + new Date().getTime();
-      img.src = src;
-      fullimg.src = src;
-    }
-
-    function refreshImage() {
-      loadImage();
-
-      const toast = document.getElementById("toast");
-      toast.style.display = "block";
-
-      setTimeout(() => {
-        toast.style.display = "none";
-      }, 1500);
-    }
-
-    function openFullscreen() {
-      document.getElementById("fullscreen").style.display = "flex";
-    }
-
-    function closeFullscreen() {
-      document.getElementById("fullscreen").style.display = "none";
-    }
-
-    loadImage();
-  </script>
+  </main>
 
 </body>
 </html>
